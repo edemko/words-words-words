@@ -1,7 +1,4 @@
-title: Okuno’s Blag
-published: 2018-12-26
-tag: dunno
-tag: foobar
+# My Blog: A Poorer Molecular Biologist
 
 The basic idea is to write in markdown, then generate static html.
 The resulting site should be hostable entirely as static files.
@@ -24,7 +21,11 @@ source .venv-py3/bin/activate
 pip install -r do/requirements.txt
 export PYTHONPATH="${PYTHONPATH}:$(pwd)"
 export PATH="${PATH}:/directory/containing/zedo/executable"
+zedo init
 ```
+
+Something I haven't yet implemented in zedo is the ability to produce a distribution.
+For now, distribute from `.zedo/build/` after `ln -s ../../src/assets ../../src/static .zedo/build/`.
 
 A particularly useful command is `zedo mini-httpd`, which rebuilds the site and starts an http server on `localhost:10080`.
 Edit `do/mini-httpd.do` to change the port.

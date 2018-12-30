@@ -21,6 +21,7 @@
     - [ ] max-height for each by-\*, or at least link to them as headers
 - [ ] click on tags anywhere to jump to the archive of othat tag
 - [x] use mako instead of rolling my own terrible templates out of python format strings
+- [ ] mathematics markdown (see [this mess](/articles/clock-design.html))
 - [ ] audit
     - [x] use `zedo ifchange -f` where possible
     - [ ] is mako being used in the most efficient way?

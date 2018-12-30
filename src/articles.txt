@@ -1,1 +1,13 @@
+custom-keyboards
+calendar-log
+year-12017
+how-to-haiku
+fizzbuzz
+fun-words
+colors
+doodles
+artifact-spirit
+clock-design
+abstraction
+ink-roundel
 orders-of-magnitude

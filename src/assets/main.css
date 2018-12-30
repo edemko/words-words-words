@@ -112,7 +112,7 @@ body {
     font-family: 'Computer Modern Serif', serif;
     font-size: 18px;
 }
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3 {
     font-weight: normal;
     text-align: left;
 }
@@ -123,6 +123,25 @@ h1, h2, h3, h4, h5, h6 {
 .content pre {
     font-family: 'Computer Modern Typewriter Light', monospace;
 }
+
+/* Super and subscripts for some reason don't get smaller by default.
+    Let's fix that.
+*/
+sup,
+sub {
+    font-size: 70%;
+}
+/* The footnotes section needs to be better set-off from the rest of the text.
+    The text is smaller.
+    The first paragraph in a footnote should not have an indent.
+*/
+div.footnote {
+    font-size: 90%;
+}
+div.footnote > ol > li > p:first-child {
+    text-indent: 0px;
+}
+
 
 /* As much as I like LaTeX, I'm using Source Code Pro for larger code listings.
     Really, that's just because it's what I program in.
