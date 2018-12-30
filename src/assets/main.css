@@ -1,0 +1,159 @@
+/**************/
+/* Structural */
+/**************/
+
+/* Wir muss habe lebensraum! */
+body {
+    max-width: 50em;
+    padding: 0px 1.5em;
+    margin: auto;
+    margin-bottom: 10vh;
+}
+
+/* The navigation links should be nice and evenly spaced across the top. */
+nav > ul {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    text-align: center;
+    align-items: baseline;
+    padding: 0px; /* because padding otherwise puts the flow off-center */
+}
+nav > ul > li {
+    flex: 1 1 auto;
+    display: inline-block;
+    list-style: none;
+}
+
+/* The article title and metadata should be closer together than they both are to the content. */
+div.meta h1 { margin-bottom: 0px; }
+div.meta ul { margin: 0px; }
+div.meta { margin-bottom: 1em; }
+/* The metadata should be less prominent than any other text on screen. */
+ul.meta {
+    font-size: 85%;
+    color: gray; /* FIXME does this color really belong here? */
+}
+ul.meta > li {
+    display: inline-block;
+    list-style: none;
+}
+/* The metadata should go all on one line.
+    If so, then separate each entry with pipes, since otherwise the default si to cram it all together.
+*/
+ul.meta > li::before { content: " | "; }
+ul.meta > li:first-child::before { content: ""; }
+/* I wish I could use this instead of hardcoding the colons,
+    but then the page wouldn't look right w/o css.
+.meta ul > li label::after { content: ": "; }
+*/
+
+/* It'd be very bad if certain things overflow their containers. */
+nav > ul,
+.content .codehilite {
+    overflow-x: auto;
+}
+
+/* It's nice to indent and separate paragraphs.
+    Unfortunately, more than just <p> tags are logical paragraphs.
+*/
+/* FIXME on smaller screens, reduce the amount of indent from lists. */
+.content p,
+.content dd {
+    text-indent: 1em;
+}
+.content p {
+    margin-top: 0.1em;
+    margin-bottom: 0.4em;
+}
+/* Special blocks should be set off more. */
+.admonition,
+.content .codehilite {
+    margin: 1em 2em;
+}
+
+/* The bullets are redundant when I've got checkboxes. */
+.content ul.checklist > li {
+    list-style: none;
+}
+/* Definition list default styling is terrible.
+    Set the title to bold and give it a colon afterwards.
+*/
+.content dt {
+    font-weight: bold;
+    margin-top: 0.5em;
+    margin-left: 1em;
+}
+.content dt::after { content: ": "; }
+.content dd {
+    margin-left: 1.5em;
+}
+
+
+
+
+
+/**************/
+/* Typography */
+/**************/
+
+/* The blog title should be larger than the headings. */
+nav h1 { font-size: 2.5em; }
+/* Small caps for navigation links is nice. */
+nav > ul { font-variant: small-caps; }
+
+/* I like LaTeX.
+    Font should be computer modern.
+    Content should be justified (except headings, obviously).
+    Headings that are too bold just look blobby; keep it light.
+    Code should be type set in Computer Modern Typewriter; I've noticed that the light version looks better on screens.
+*/
+body {
+    font-family: 'Computer Modern Serif', serif;
+    font-size: 18px;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    text-align: left;
+}
+.content {
+    text-align: justify;
+}
+.content code,
+.content pre {
+    font-family: 'Computer Modern Typewriter Light', monospace;
+}
+
+/* As much as I like LaTeX, I'm using Source Code Pro for larger code listings.
+    Really, that's just because it's what I program in.
+    Using this font inline is gross, though, b/c the font metrics don't match up well with Computer Modern.
+*/
+.content .codehilite code,
+.content .codehilite pre {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 16px;
+}
+
+/*
+    Links are a light azure, but green on hover.
+    There's a nice transition back to normal.
+    The navigation links are not colored, because that'd be distracting.
+    
+    Links aren't underlined, because underline is ugly.
+    Although, to make it easier to navigate by keyboard, focused links _are_ underlined.
+*/
+a:link { text-decoration: none; }
+nav a { color: initial; }
+.content a:link,
+.content a:visited {
+    color: #06D;
+    transition: color 2.5s 0.5s;
+}
+.content a:hover,
+.content a:focus {
+    color: #083;
+    transition: color 0s;
+}
+a:focus {
+    text-decoration: underline;
+}

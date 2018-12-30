@@ -1,0 +1,28 @@
+.admonition {
+    padding: 0.5em 2em;
+    border-radius: 5px;
+}
+.admonition > .admonition-title {
+    font-size: 120%;
+    font-variant: small-caps;
+    margin: 0px;
+    margin-left: -1em;
+    padding-bottom: 0px;
+    text-indent: 0px;
+}
+.admonition > .admonition-title + * {
+    margin-top: 0px;
+}
+
+.admonition.tip {
+    background-color: #CFC;
+}
+.admonition.note {
+    background-color: #ACF;
+}
+.admonition.caution {
+    background-color: #FF9;
+}
+.admonition.warning {
+    background-color: #FDA;
+}

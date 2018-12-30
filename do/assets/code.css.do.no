@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -e
+
+echo >qwerty "ASDFG"
+pygmentize -S default -f html -a .codehilite > $1

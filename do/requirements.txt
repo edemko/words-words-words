@@ -1,0 +1,11 @@
+feedgen==0.7.0
+lxml==4.2.5
+Mako==1.0.7
+Markdown==3.0.1
+markdown-checklist==0.4.1
+MarkdownSubscript==2.1.1
+MarkdownSuperscript==2.1.1
+MarkupSafe==1.1.0
+Pygments==2.3.1
+python-dateutil==2.7.5
+six==1.12.0

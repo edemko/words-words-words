@@ -1,0 +1,4 @@
+.zedo/
+.venv-py3/
+__pycache__
+src/templates/.cache/
