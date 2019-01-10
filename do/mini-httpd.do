@@ -3,7 +3,7 @@ set -e
 
 zedo phony
 
-zedo ifchange all working.html
+zedo ifchange all
 
 if which mini_httpd >/dev/null; then
     HTTPD=mini_httpd

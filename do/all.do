@@ -4,7 +4,18 @@ set -e
 zedo phony
 
 for md in src/articles/*.md; do
+    echo >&2 "$md"
     target=${md#src/}
     zedo ifchange "$target"
 done
-zedo ifchange index.html archive.html about.html feeds
+
+echo >&2 "index.html"
+zedo ifchange index.html
+echo >&2 "archive.html"
+zedo ifchange archive.html
+echo >&2 "about.html"
+zedo ifchange about.html
+echo >&2 "feeds"
+zedo ifchange feeds
+echo >&2 "working.html"
+zedo ifchange working.html

@@ -49,10 +49,12 @@ I build the site on my local machine so as to eliminate dependencies from the se
 I'm using rsync to optimize time-to-xfer.
 
 ```sh
-rsync -rcL /this/repo/.zedo/build servername:/path/to/www/root
+rsync -vrcL /this/repo/.zedo/build/* servername:/path/to/www/root
 ssh servername
-chmod -R 640 /path/to/www/root
+cd /path/to/www/root
 chown -R <user>:www-data .
+find . -type d -exec chmod 750 {} \;
+find . -type f -exec chmod 640 {} \;
 ```
 
 
