@@ -60,7 +60,7 @@ Similarly if they key exists on an unencrypted storage medium.
 
 !!! caution "To-Do"
     I noticed that PuttyGen has a field for "comment".
-    I wonder how to do something similar on *nix.
+    I wonder how to do something similar on \*nix.
     Where is that comment stored, and are there any conventions about it?
 
 Backup the keypair.
@@ -120,7 +120,7 @@ This generally means obtaining a fingerprint over a secondary (and preferably mo
 ## Fingerprinting Keys
 
 It seems there are many different fingerprinting algorithms.
-On *nix, it seems `ssh-keygen -lf /path/to/ssh/key` is a common way to obtain a fingerprint.
+On \*nix, it seems `ssh-keygen -lf /path/to/ssh/key` is a common way to obtain a fingerprint.
 Also available is `gpg --with-fingerprint <file>.asc`.
 
 !!! caution "To-Do"
@@ -141,6 +141,19 @@ Also available is `gpg --with-fingerprint <file>.asc`.
     These seem to be a key distribution system.
     Tell me more.
     Especially, what modes of use are safe/unsafe?
+
+Well, Debian gives a limited view on the uses of keyservers.
+In particular:
+
+`gpg --keyserver keyring.debian.org --recv-keys 0x<hex key id>`
+
+!!! caution "To-Do"
+    Where fo I find key servers?
+    How are keys protected in transit?
+
+!!! note "Links"
+    * [Verifying authenticity of Debian CDs](https://www.debian.org/CD/verify)
+    * [Debian Public Key Server](https://keyring.debian.org/)
 
 
 ## Certificate Authorities
@@ -189,6 +202,7 @@ The convention appears to be `sha256sums.txt` and `sha256sums.txt.sig`.
 
 Check the signature file with `gpg --verify sha256sums.txt.sig`.
 This appears to be a short form, and gpg strips the `.sig` off to find the file under scrutiny.
+Indeed, Debian distributes a `.sign` file, and I verified it with `gpg --verify SHA256SUMS.sig SHA256SUMS`.
 It looks like this step relies on the signing key being in your keyring.
 
 !!! caution "To-Do"
@@ -218,6 +232,8 @@ In summary:
   * verify checksum signature with gpg
   * verify target file integrity with `sha256sum -c`
 
+!!! note "Links"
+  * [How to verify an authenticity of downloaded Debian ISO images](https://linuxconfig.org/how-to-verify-an-authenticity-of-downloaded-debian-iso-images)
 
 ## Encrypting Storage Media
 
