@@ -1,13 +1,21 @@
-#!/usr/bin/env bash
-set -e
+#!/usr/bin/env python3
 
-SRC="$(zedo ifchange -f "${2}.md")"
+import makoc
+import zedo, mdc
+import sys
+class Object: pass
 
+outFile, basename = sys.argv[1:3]
+srcFile = zedo.ifchange(basename+".md", find=True)
 
-MDC="$(zedo ifchange -f scripts/mdc.py)"
-templDir="src/templates"
-# FIXME these redos should be called from $MDC
-zedo ifchange templates/base.html.mako
-zedo ifchange templates/bare.html.mako
+with open(srcFile, 'rt', encoding="utf-8") as fp:
+    src = fp.read()
 
-python3 "$MDC" "$templDir" "$SRC" "$1"
+zedo.ifchange("templates/base.html.mako")
+zedo.ifchange("templates/bare.html.mako")
+
+html, _ = mdc.compile(src)
+html = makoc.compile("bare.html.mako", content=html)
+
+with open(outFile, 'wt', encoding="utf-8") as fp:
+    fp.write(html)

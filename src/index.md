@@ -29,6 +29,7 @@
     - [ ] are all targets phony/volatile as needed?
     - [ ] are extra files being marked as such?
     - [ ] feeds are constructed as fully as possible. see [here](https://validator.w3.org/feed/docs/atom.html)
+    - [ ] dependencies (esp. on python scripts) are tracked correctly
 
 
 ### Latest Article

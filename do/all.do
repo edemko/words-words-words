@@ -4,7 +4,6 @@ set -e
 zedo phony
 
 for md in src/articles/*.md; do
-    echo >&2 "$md"
     target=${md#src/}
     zedo ifchange "$target"
 done
@@ -19,3 +18,7 @@ echo >&2 "feeds"
 zedo ifchange feeds
 echo >&2 "working.html"
 zedo ifchange working.html
+
+if [ ! -e .zedo/build/assets ]; then ln -s ../../src/assets .zedo/build/; fi
+if [ ! -e .zedo/build/assets ]; then ln -s ../../src/static .zedo/build/; fi
+ls -l >&2 .zedo/build/

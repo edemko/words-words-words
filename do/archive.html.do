@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 from os import path
+import sys
 import json
 import re
-from mako.template import Template
-from mako.lookup import TemplateLookup
+import makoc
 import zedo
 
 class Object:
@@ -16,14 +16,14 @@ def main(outFp):
     with open(published, 'rt', encoding="utf-8") as fp:
         lines = fp.readlines()
     by_date, by_tag = render_links(lines)
-    t = tlookup.get_template("archive.html.mako")
-    outFp.write(t.render(by_date = by_date, by_tag = by_tag))
+    html = makoc.compile("archive.html.mako", by_date=by_date, by_tag=by_tag)
+    outFp.write(html)
 
 def render_links(lines):
     objs, by_tag = [], dict()
+    lines = list(line.strip(" \t\n\r") for line in lines if line.strip(" \t\n\r"))
+    zedo.ifchange(*("articles/{}.html".format(line) for line in lines), find=True)
     for line in lines:
-        line = line.strip(" \t\n\r")
-        if not line: continue
         obj, tags = render_link(line)
         objs.insert(0, obj)
         for tag in tags:
@@ -34,7 +34,7 @@ def render_links(lines):
 
 def render_link(line):
     articleUrl = "articles/{}.html".format(line)
-    articleHtml = zedo.ifchange(articleUrl, find=True)
+    articleHtml = path.join(".zedo", "build", articleUrl) # FIXME
     articleMeta = articleHtml + ".meta"
     with open(articleMeta, 'rt', encoding="utf-8") as meta:
         meta = json.loads(meta.read())
@@ -49,10 +49,5 @@ def render_link(line):
 if __name__ == "__main__":
     zedo.ifchange("templates/base.html.mako")
     zedo.ifchange("templates/archive.html.mako")
-
-    import sys
-    templDir = "src/templates"
-    cacheDir = path.join(templDir, ".cache")
-    tlookup = TemplateLookup(directories=[templDir], module_directory=cacheDir)
     with open(sys.argv[1], 'wt', encoding="utf-8") as outFp:
         main(outFp)
