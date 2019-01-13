@@ -1,6 +1,7 @@
 title: How to Haiku
 published: 2017-12-10
 tag: haiku
+tag: notes
 
 
 I enjoy writing Japanese-langauge haiku (as well as my poor grasp of Japanese grammer allows), but I have not yet collected all of my reserach into one place.

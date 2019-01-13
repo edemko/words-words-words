@@ -3,6 +3,7 @@ published: 2017-11-30
 updated: 2018-12-30
 tag: sisyphus
 tag: review
+tag: notes
 
 
 ## Changes in 12019

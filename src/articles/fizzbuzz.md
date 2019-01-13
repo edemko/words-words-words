@@ -1,7 +1,7 @@
 title: Kanso FizzBuzz
 published: 2018-01-27
 updated: 2018-02-25
-tag: computers
+tag: computing
 tag: simplicity
 tag: rant
 

@@ -1,7 +1,7 @@
 title: Abstraction
 published: 2018-03-13
 tag: computing
-tag: humans
+tag: human factors
 
 A human brain can only keep a few ideas in their head at once.
 The numbers I've heard are about 3-5 things, and perhaps a few special people can remember 7 ideas at once.

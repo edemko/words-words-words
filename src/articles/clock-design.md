@@ -1,6 +1,7 @@
 title: A Well-Tuned Clock
 published: 2018-03-13
 tag: design
+tag: notes
 
 It seems that timing and cycles are important for humans to locate themselves in their time direction.
 As such, I should design for myself a clock that suits my orientation in time and is attractive given my interests.

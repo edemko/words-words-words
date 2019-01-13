@@ -2,6 +2,7 @@ title: Notes on Keebs
 published: 2017-10-08
 updated: 2017-09-16
 tag: making
+tag: notes
 tag: electronics
 
 ## Making a Keyboard from Scratch

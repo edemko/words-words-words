@@ -1,7 +1,7 @@
 title: Orders of Magnitude in Computing
 published: 2018-12-29
 tag: computing
-tag: humans
+tag: human factors
 
 I think one of the things that make computers feel like magic to people, even computer professionals, is the sheer range of magnitudes involved.
 
