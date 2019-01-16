@@ -2,8 +2,10 @@ title: Toolmakers’ Manifesto
 
 People want to get things done.
 Often, a person can get a thing done faster or easier by using a machine.
-Unfortunately, out of all the kinds of machines in the world, only a few would actually help, and the rest would be a hinderance.
+Unfortunately, out of all the kinds of machines in the world, only a few would actually help, and the rest would be a hinderance[^opportunity-cost].
 Therefore, people need to look at what machines are available, and choose one that will be suitable for what the want to get done.
+
+[^opportunity-cost]: Even if that hinderance is only opportunity cost, that's a hinderance.
 
 A person who makes machines probably has a good idea what their machines are useful for.
 Thet do not, however, know exactly what you want to get done; they don't even know who you are.

@@ -12,3 +12,6 @@ abstraction
 ink-roundel
 orders-of-magnitude
 year-12018
+thinking-with-types
+society-organization
+compatibility-vs-change
