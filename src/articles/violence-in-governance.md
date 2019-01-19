@@ -1,3 +1,5 @@
+title: Violence in Governance
+
 It's a question of Nash equilibria.
 There are systems where a simple change will make all the options worse, but everyone's lives better.
 It's messier on the large scale, but the principle applies.

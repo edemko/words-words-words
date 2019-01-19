@@ -1,3 +1,5 @@
+title: Power-On Process
+
 When you turn your computer on, the very first thing that happens is that the incoming power wire gets voltage:
 
 ```

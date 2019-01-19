@@ -1,3 +1,4 @@
+title: Needs, Wants, and Making Awesome
 
 Clothing is important to people, and it has been for a long time.
 It might not be immediately obvious, but it turns out that people's lives are improved when clothing gets cheaper, or more comfortable, or more fashionable.

@@ -3,7 +3,7 @@ set -e
 
 zedo phony
 
-echo >&2 "src/articles/*.md"
+echo >&2 'src/articles/*.md'
 for md in src/articles/*.md; do
     target=${md#src/}
     zedo ifchange "$target"
