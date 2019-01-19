@@ -1,4 +1,7 @@
 title: Crypto Cookbook
+tag: computing
+tag: notes
+
 
 Cryptography is a technology fundamentally important to the information age.
 It's also one of those "magic" technologies.
@@ -22,10 +25,126 @@ Here, I want to understand:
     The information here is merely for my own reference later as I write the real article.
 
 
-## Create a Key Pair
+## General Principles
+
+I strongly disagree with the "use this one technology and don't think about it" approach to computer security.
+Compsec starts with the education of the individual.
+It cannot be otherwise, because it is a war; you wouldn't expect there to be a magic bullet that wins fights, would you?
+
+It is impossible for two parties to authenticate themselves to each other over an insecure channel without some sort of prior communication over a secure channel.
+In practice, the prior secure communication takes one of a few forms, from most to least secure:
+
+  * Exchange secrets or public keys (fingerprints) over a secure, authenticated channel established by the parties themselves.
+  * Defer trust to a certificate authority, which whom both parties have previously registered public keys and established a secure connection.
+  * Establish trust through multiple insecure but _independent_ methods.
+
+Security is never a binary state of secure vs. insecure.
+To analyze the security of a procedure, analyze the likelihood of failure compared to other options.
+Likelihood of failure is not only likelihood of credential compromise, but also how likely you are to understand the system well enough to use it correctly, or even stick to using it in the first place.
+
+
+## Managing Passwords
+
+!!! warning
+    I've only just started looking into this.
+
+The largest source of password compromises seems to be from cracking into a database.
+Signing up with online services means trusting their methods of password storage.[^open-source-trust]
+In general, you cannot guarantee that they aren't simply storing passwords in plaintext, or otherwise storing them insecurely.
+Therefore, credential stuffing attacks are the most prevalent attack vector to be concerned about.
+
+After that, there's the worry of low-entropy passwords stored securely.
+This entropy depends on the attack model: what algorithms are being used to generate guesses?
+Against all algorithms, longer, less-memorable passwords are better.
+If you need to remember a password, make it memorable based on things that aren't close to being analyzed by a computer.
+Personal information, social network effects, and anything that has ever been written down are already analyzed by a computer.
+Personally, I use phonetic and metaphorical resonance with my sense of aesthetics, but understand that this process nevertheless reduces the entropy of my passwords, so be over-cautious when doing this.
+
+
+[^open-source-trust]: In practice, there are very few people who will fully audit an open-source implementation, but at least you can have some increased trust over closed-source in that someone could notice a breach of trust and blow the whistle.
+
+Mitigations include:
+
+  * Sign up for fewer online accounts, and delete the ones you don't need.
+  * Use a password manager to increase the likelihood of using unique, high-entropy passwords.
+  * Anonymize what accounts you can.
+  * Segregate accounts (credentials and identifying information) by threat model.
+  * Use password generators such as `pwgen` and `xkcdpass`, but understand the entropy they produce.
+  * "Burn" any password that has been compromised, even if it wasn't a password for your account.
+
+
+!!! note "Links"
+    * [';--have i been pwned?](https://haveibeenpwned.com/)
+    * [Pwned Passwords](https://haveibeenpwned.com/Passwords)
+    * [`pwgen` Manual Page](https://linux.die.net/man/1/pwgen)
+    * [`xkcdpass` Manual Page](http://manpages.ubuntu.com/manpages/xenial/man1/xkcdpass.1.html)
+
+!!! caution "To-Do"
+    * Sources on how to calculate the entropy of a password generation algorithm, assuming the attacker knows the algorithm?
+    * How do aesthetic choices reduce the entropy of a password?
+
+### Pwned Passwords
+
+Never type you password into a third-party service.
+Admittedly, [Pwned Passwords](https://haveibeenpwned.com/Passwords) is open-source and allegedly implements anonymity, but I haven't personally audited the source code, so I'll use it locally.
+Therefore, I downloaded the database and loaded it into postgresql to I could search it quickly.
+
+```sql
+COPY pw (hash, count) FROM 'pwned-passwords-sha1-<version>.txt' WITH DELIMITER ':';
+CREATE EXTENSION pgcrypto;
+ALTER TABLE pw ALTER COLUMN hash SET DATA TYPE bytea USING decode(hash, 'hex');
+VACUUM(FULL, ANALYZE, VERBOSE);
+REINDEX TABLE pw;
+SELECT * FROM pw WHERE hash = digest('P@ssword', 'sha1');
+```
+
+This took a while, and it seriously impacted my harddrive performance, especially during reindexing.
+Even just the initial data load took three hours before I went to bed.
+Now, though seraching for passwords happens very quickly:
+
+```sql
+SELECT * FROM pw WHERE hash = digest('P@ssword', 'sha1');
+```
+
+!!!warning
+    When done, don't forget to clear you psql history, otherwise that's a place where your passwords are stored in cleartext:
+
+    ```sh
+    echo '' > ~/.psql_history
+    ```
+
+!!! caution "To-Do"
+    Is there anywhere else that psql might save the cleartext password?
+    E.g. query caching?
+
+## Managing Asymmetric Key Cryptography
+
+!!! note "Links"
+    * [GPG Tutorial](https://futureboy.us/pgp.html)
+
+!!! caution "To-Do"
+    I've got to re-organize this section.
+
+    * when should you create/replace a key?
+    * create keys
+    * securing and backing up keys
+    * revoke keys
+    * distribute keys
+    * when and how much should you trust others keys?
+    * receive keys
+    * using keys conveniently
+    * particular tasks and services:
+        * encrypted storage media
+        * verify files
+        * ssh client
+        * ssh server
+        * proton mail
+        * sign files
+
+### Create a Key Pair
 
 This should be done on a trusted computer, using trusted software.
-Guides recommend `ssh-keygen`, or PuttyGen on Windows.
+Guides recommend `ssh-keygen` or `gpg`, or PuttyGen on Windows.
 
 There's definitely a choice of key type (PuttyGen gives RSA, DSA, ECDSA, ED25519, and SSH-1 (RSA). I can only assume plain RSA means SSH-2?).
 At least RSA, but likely others offer a choice of size, which defaults to 2048 bits.
@@ -52,11 +171,11 @@ Either way, the base names for a keypair should probably be identical.
     Atlassian recommends checking for an existing key pair.
     If `ssh-keygen` really does just use a default, this seems like wise advice.
 
-Because the private key is sensitive, many guides recommend encrypting it.
+Because the private key is sensitive, many guides recommend adding a passphrase on it.
 Both `ssh-keygen` and PuttyGen have this capability built-in.
 They ask for a passphrase that I assume is then given to a key derivation function, but leaving the passphrase blank skips the encryption step.
 Certainly on a computer on which I am not the sole administrator, I should encrypt my private key.
-Similarly if they key exists on an unencrypted storage medium.
+The same holds for keys exist on an unencrypted storage medium with no physical access controls.
 
 !!! caution "To-Do"
     I noticed that PuttyGen has a field for "comment".
@@ -76,48 +195,18 @@ Therefore, it is worth not having to reconstruct your cryptographic identity to 
     * [Microsoft Azure -- How to use SSH keys with Windows on Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ssh-from-windows)
     * [Atlassian -- Creating SSH keys](https://confluence.atlassian.com/bitbucketserver/creating-ssh-keys-776639788.html)
 
+#### Revoke a Key
 
-## Install a Public Key on Another Machine
+In the case of a key failure (compromised, lost, or retired intensionally), there must be a way to tell everyone that your key is no longer valid.
+This is apparently done with revocation certificates.
+In gpg, these end up imported and published to key servers in much the same way as the keys themselves.
 
-For many online services, this consists of merely pasting your public key into a text input box.
-For ssh, this means adding the public key into `~/.ssh/authorized_keys` on the remote machine.
-There's also a utility called `ssh-copy-id`.
-
-In any case, it seems that authenticators are especially sensitive to trailing whitespace.
-
-Presenting your public key is not generally dangerous.
-However, it's not 
-On first connecting to a machine, you must verify that machine's identity (see below).
-
-!!! caution "To-Do"
-    Why is `authorized_keys` special: is it hardcoded?, is it configured by sshd?
-    What is the format of a public key, of various types of keys?
-    How much/little whitespace is acceptable?
-    Where is the documentation that tells me where the authentication process looks for public keys?
-    While I'm at it, I should review the theory behind making an ssh connection.
-
-!!! Links
-    * [Debian -- How to set up ssh so you aren't asked for a password](https://www.debian.org/devel/passwordlessssh)
-    * [ssh.com -- ssh-copy-id](https://www.ssh.com/ssh/copy-id)
+!!!note "To-Do"
+    Why aren't revocation certificates guarded by a passphrase?
+    I haven't even seem this mentioned, much less recommended or implemented.
 
 
-## Connecting To Another Machine
-
-I believe `ssh-keygen` puts `id_rsa{,.pub}` into `~/.ssh/` by default.
-I suppose that's where `ssh` looks for the private key when making a connection.
-
-Graphical programs probably have a file selector to point at your private key.
-Filezilla does, at least, as does Putty, though I think Putty is technically an ssh agent.
-
-When connecting, the remote machine will identify itself with its own public key.
-Ensure the advertised public key is correct.
-This generally means obtaining a fingerprint over a secondary (and preferably more secure) communication channel.
-
-!!! note "Links"
-    * [UB Center for Computing Research -- Using SSH keys with Filezilla (Windows)](https://ubccr.freshdesk.com/support/solutions/articles/13000036435-using-ssh-keys-with-filezilla-windows-)
-
-
-## Fingerprinting Keys
+### Fingerprinting Keys
 
 It seems there are many different fingerprinting algorithms.
 On \*nix, it seems `ssh-keygen -lf /path/to/ssh/key` is a common way to obtain a fingerprint.
@@ -135,7 +224,7 @@ Also available is `gpg --with-fingerprint <file>.asc`.
     * [Stack Overflow -- How do I find my RSA key fingerprint?](https://stackoverflow.com/questions/9607295/how-do-i-find-my-rsa-key-fingerprint)
 
 
-## Key Servers
+### Key Servers
 
 !!! caution "To-Do"
     These seem to be a key distribution system.
@@ -156,27 +245,27 @@ In particular:
     * [Debian Public Key Server](https://keyring.debian.org/)
 
 
-## Certificate Authorities
+### Certificate Authorities
 
 !!! note "Links"
     * [Let's Encrypt](https://letsencrypt.org/)
 
 
-## SSH Agents
+### SSH Agents
 
 !!! caution "To-Do"
     I do not know how these work.
     Is Putty one?
 
 
-## Encrypted Email
+### Encrypted Email
 
 !!! caution "To-Do"
     I have no clue here.
     Something-something gpg-signatures.
 
 
-## Verifying Critical Files
+### Verifying Critical Files
 
 Certain files, especially OS distros and system software packages, are high-value targets, and should be verified carefully.
 It seems this is generally done by also providing a file of hashes, and signing this hash file.
@@ -211,7 +300,7 @@ It looks like this step relies on the signing key being in your keyring.
     How do you move it around between computers?
     What operations exactly are being used to perform verification?
     Are there multiple possible formats for the `.sig` file?
-    What even are the real names for thee files?
+    What even are the real names for these files?
 
 Now that the hashes have been verified to come from a trusted source, all that is left is to verify the integrity of the file(s).
 This can be done with `sha256sum --check --ignore-missing sha256sums.txt`.
@@ -233,27 +322,117 @@ In summary:
   * verify target file integrity with `sha256sum -c`
 
 !!! note "Links"
-  * [How to verify an authenticity of downloaded Debian ISO images](https://linuxconfig.org/how-to-verify-an-authenticity-of-downloaded-debian-iso-images)
+    * [How to verify an authenticity of downloaded Debian ISO images](https://linuxconfig.org/how-to-verify-an-authenticity-of-downloaded-debian-iso-images)
 
 ## Encrypting Storage Media
 
+With modern distros, it seems to be quite easy to encrypt a partition with LUKS when formatting it.
+However, I'll note that I couldn't find the option to do this in gparted, and gnome-disk-utility crashed multiple times immediately after requesting to apply changes until it finally decided to fly straight.
+Mounting, at least in XFCE seems to be as easy as mounting anything else, with the exception of an additional step entering your passphrase, which the gui walks you through seamlessly.
+
 !!! caution "To-Do"
     With modern distro's installers, this seems to be quite user-friendly.
-    How does it really work?
     What are the specific technologies behind it?
-    What is LUKS, for example?
-    At what granularities can encryption be performed: drives, partitions, directories, files?, and by what means?
+    What is LUKS?
+    How does it really work?
+    Are there alternative formats?
+    How do I do this stuff from the command line?
+    At what other granularities can encryption be performed: drives, directories, files?, and by what means?
     What is the residency of decrypted files? In ram? On lock screen? On suspend/hibernate?
-    How do I mount an encrypted partition after the computer is booted?
+
+!!! note "Links"
+    * [EncryptedFilesystemsOnRemovableStorage](https://help.ubuntu.com/community/EncryptedFilesystemsOnRemovableStorage)
+
+## Specific Services
+
+### SSH
+
+#### Set up `sshd` on the Remote Machine
+
+On debian systems, installation is done through the `openssh-server` package.
+It seems this automatically generates a suite of server/host keys.
+You can obtain the server's key fingerprint with `ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub`, or any of the other `ssh_host_*_key.pub` files.
+Use this later to verify the machine's identity before each client's first connection.
+
+!!! caution "To-Do"
+    Are there any other quality sshd implementations available?
+    The debian wiki has some more hardening steps beyond what I've laid out here.
+
+While we're here, it's a good time to harden the ssh server.
+Make sure public key authentication is on, password authentication is off.
+There are apparently security implications about X11 forwarding, so that can be turned off as well.
+It's probably also a good idea to set up a whitelist of groups and users that are even allowed to ssh in.
+This seems to be just the basics, and there are more things that could be done; see the links below for some tips
+
+A key component of ssh security is keeping software up-to-date.
+To this end, it is probably a good idea to install `unattended-upgrades`.
+That suggests `needrestart`, and I expect I need to set restarts to be automatic (`$nrconf{restart} = 'a';`) if unattended-upgrades is to work fully unattended.
+
+!!! Links
+    * [Debian — SSH](https://wiki.debian.org/SSH)
+    * [OpenSSH security and hardening](https://linux-audit.com/audit-and-harden-your-ssh-configuration/)
+    * [UnattendedUpgrades](https://wiki.debian.org/UnattendedUpgrades)
 
 
-## General Principles
 
-It is impossible for two parties to authenticate themselves to each other over an insecure channel without some sort of prior communication over a secure channel.
-In practice, the prior secure communication takes on of two forms.
-Exchange public keys (or their fingerprints) over a secure channel established by the parties themselves.
-Defer trust to a certificate authority, which whom both parties have previously registered public keys.
+#### Install a Public Key on Another Machine
 
-!!! caution
-    Do I have my terminology correct above?
-    Are there really no distributed methods?
+Add your public key into `~/.ssh/authorized_keys` on the remote machine, or alternatively use `ssh-copy-id`.
+I'd recommend doing `ssh-copy-id -n` to do a dry run first.
+
+On first connecting to a machine, you must verify that machine's identity (see below).
+
+!!! caution "To-Do"
+    Why is `authorized_keys` special: is it hardcoded?, is it configured by sshd?
+    What is the format of a public key, of various types of keys?
+    How much/little whitespace is acceptable?
+    Where is the documentation that tells me where the authentication process looks for public keys?
+    While I'm at it, I should review the theory behind making an ssh connection.
+
+!!! Links
+    * [Debian -- How to set up ssh so you aren't asked for a password](https://www.debian.org/devel/passwordlessssh)
+    * [ssh.com -- ssh-copy-id](https://www.ssh.com/ssh/copy-id)
+
+
+#### Connecting To Another Machine
+
+I believe `ssh-keygen` puts `id_rsa{,.pub}` into `~/.ssh/` by default.
+I suppose that's where `ssh` looks for the private key when making a connection.
+
+Graphical programs probably have a file selector to point at your private key.
+Filezilla does at least, as does Putty, though I think Putty is technically an ssh agent.
+
+When connecting, the remote machine will identify itself with its own public key.
+Ensure the advertised public key is correct.
+This generally means obtaining a fingerprint over a secondary (and preferably more secure) communication channel.
+
+!!! note "Links"
+    * [UB Center for Computing Research -- Using SSH keys with Filezilla (Windows)](https://ubccr.freshdesk.com/support/solutions/articles/13000036435-using-ssh-keys-with-filezilla-windows-)
+    * [Good practices for using ssh](http://lackof.org/taggart/hacking/ssh/)
+
+
+
+### ProtonMail
+
+I should have known, but ProtonMail does end-to-end and zero-access encryption with a public key infrastructure.
+When emailing someone in ProtonMail, you have the service find the recipient's public key and use that to encrypt.
+Incoming insecure messages are encrypted with your public key immediately on reciept.
+I haven't yet figured out how email gets sent to insecure recipients.
+Between two secure parties is end-to-end, wheras with only one secure party, the best achievable is zero-access.
+
+It seems that party-to-party authentication in ProtonMail relies on the authenticity of the first contact to exchange public keys, and for that we trust the ProtonMail service.
+[This post](https://protonmail.com/blog/address-verification-pgp-support/) and [this support article](https://protonmail.com/support/knowledge-base/address-verification/)seem to indicate that trusted sender-key associations are stored similarly to ssh (where e.g. I decide to trust a server's key).
+For this, it seems the way to maintain security without necessarily trusting ProtonMail not to have been hacked is to verify they key through an independent connection, preferably secure.
+The difference between this and authenticating communications in manual PGP is, it seems, not much.
+
+Private key storage is about what I'd expect.
+Your login password is run through a PBKDF to generate a symmetric key locally, which is then used to encrypt your private key before storing it on ProtonMail's servers.
+Sources: [Single Password](https://protonmail.com/blog/encrypted_email_authentication/), [Private Key Storage](https://protonmail.com/support/knowledge-base/how-is-the-private-key-stored/).
+In case you want to intensionally change your password, that means you d/l your private keys, decrypt them with your existing password, then re-encrypt with the new password before sending them back to the server for encrypted-at-rest storage.
+
+[This](https://protonmail.com/support/knowledge-base/pgp-key-management/) seems to be a good overview of key management in Protonmail, as well as having some links to additional features.
+
+## VPN
+
+!!! caution "To-Do"
+    Just plain, simple "To-Do".
