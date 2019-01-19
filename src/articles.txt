@@ -15,3 +15,6 @@ year-12018
 thinking-with-types
 society-organization
 compatibility-vs-change
+privacy-and-fashion
+the-statistics-of-programming
+images-from-north-ga

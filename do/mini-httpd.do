@@ -3,6 +3,11 @@ set -e
 
 zedo phony
 
+
+if [ ! -e .zedo/build/assets ]; then ln -s ../../src/assets .zedo/build/; fi
+if [ ! -e .zedo/build/assets ]; then ln -s ../../src/static .zedo/build/; fi
+
+
 # zedo ifchange all
 
 if which mini_httpd >/dev/null; then
