@@ -1,5 +1,6 @@
 title: λ in Haskell
 tag: computing
+tag: notes
 
 This is an interpreter for the lambda calculus which is beautiful.
 I was inspired by a Papers We Love talk ["The Most Beautiful Program Ever Written"](https://www.youtube.com/watch?v=OyfBQmvr2Hc) to do something amazing.
@@ -10,34 +11,36 @@ In fact, the full lambda calulus is stronger in a way (though I'm not exactly su
 
 Well, it's maybe not so amazing, because this is not a self-interpreter.
 Nevertheless, the principle is there, and with a bit of decoding into the plain λ-calculus, it very well could be a self-interpreter, but I'd much rather read this syntax.
+Besides, one thing this can do extra is finding most-normalized forms even when there are free variables, and it prints out the resulting form in full rather than merely saying `#<procedure at interp.scm:489>`.
 
 ```haskell
--- FIXME do I need to import `Data.List`?
-import Data.Symbol
-
 data Expr
-    = Var Symbol
-    | Lam Symbol Expr
+    = Var String
+    | Lam String Expr
     | App Expr Expr
 
-fvs :: Expr -> [Symbol]
+fvs :: Expr -> [String]
 fvs (Var x) = [x]
-fvs (Lam y e) = fvs e \\ [y]
-fvs (App f a) = nub (fvs f ++ fvs a)
+fvs (Lam y e) = filter (/= y) (fvs e)
+fvs (App f a) = fvs f ++ fvs a
 
-subst :: Symbol -> Expr -> Expr
-subst x e' e = case e of
+subst :: (String, Expr) -> Expr -> Expr
+subst (x, e') e = case e of
     Var y -> if x == y then e' else e
-    -- FIXME `e` needs to not have `y` in its free variables
-    Lam y body -> if x == y then e else head [ Lam y' (subst e' body') | (y', body') <- newLams ]
-        where
-        newVars = y : intern . (unintern y ++) . ('_':) . show <$> [1..]
-        newLams = [(y', subst y (Var y') body) | y' <- newVars y, if y' `notElem` fvs e' ]
-    App f a -> App (subst f) (subst a)
+    Lam y body
+        | x == y -> e
+        | otherwise -> Lam y' (subst (x, e') body')
+            where
+            newVars = y : map ((y ++) . ('_':) . show) [1..]
+            (y', body') = head [mkLam y' | y' <- newVars, y' `notElem` fvs e' ]
+            mkLam x = (x, subst (y, Var x) body)
+    App f a -> App (subst (x, e') f) (subst (x, e') a)
 
 eval :: Expr -> Expr
 eval (App f a) = case eval f of
-    Lam x b -> eval (subst x a b)
+    Lam x body -> eval (subst (x, a) body)
     e -> App e a
 eval e = e
+
+usage = eval $ App (Lam "y" $ Lam "x" $ App (Var "x") (Var "y")) (Var "x")
 ```
