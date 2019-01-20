@@ -13,6 +13,11 @@ Well, it's maybe not so amazing, because this is not a self-interpreter.
 Nevertheless, the principle is there, and with a bit of decoding into the plain λ-calculus, it very well could be a self-interpreter, but I'd much rather read this syntax.
 Besides, one thing this can do extra is finding most-normalized forms even when there are free variables, and it prints out the resulting form in full rather than merely saying `#<procedure at interp.scm:489>`.
 
+!!!warning
+    There's just one problem: hygienic substitution makes the interpreter strict again.
+    Give `eval $ App (Lam "x" $ Lam "y" $ Var "y") undefined` a try.
+
+
 ```haskell
 data Expr
     = Var String

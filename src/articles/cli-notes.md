@@ -1,16 +1,33 @@
-title: CLI Notes
+title: CLI Cheatsheets
 tag: computing
-tag: notes
+tag: reference
 
-# List files installed by a package:
+## Apt/Dpkg
+
+List files installed by a package:
+
+```
 dpkg -L some-package
-# Find out what (installed) packages depend on a given package:
+```
+
+Find out what (installed) packages depend on a given package:
+
+```
 apt-cache rdepends  --installed some-package
+```
 
-# Find out what device a file or folder is on:
+
+## Devices
+
+Find out what device a file or folder is on:
+
+```
 df /path/to/filename
+```
 
-# Run commands when files change
+
+## Run commands when files change
+
 [entr](http://eradman.com/entrproject/) is said to have good ergonomics.
 
 [This stack overflow answer](https://superuser.com/a/181543) says to use `inotifywait`, but mentions some problems, and it's not installed on my main machine by default.
