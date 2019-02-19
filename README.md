@@ -36,7 +36,7 @@ The major python dependencies are:
 
   * markdown (markdown-to-html)
   * Mako (html templates)
-  * feedgen (generate rss/atom feeds)
+  * [feedgen](https://feedgen.kiesow.be/index.html) (generate rss/atom feeds)
 
 There are also a handful of 3rd-party markdown extensions:
 

@@ -133,12 +133,13 @@ sub {
 }
 /* The footnotes section needs to be better set-off from the rest of the text.
     The text is smaller.
-    The first paragraph in a footnote should not have an indent.
+    The first paragraph in a quote or footnote should not have an indent.
 */
 div.footnote {
     font-size: 90%;
 }
-div.footnote > ol > li > p:first-child {
+div.footnote > ol > li > p:first-child,
+blockquote > p:first-child {
     text-indent: 0px;
 }
 
