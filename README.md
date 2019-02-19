@@ -18,6 +18,7 @@ Also make sure `zedo` is on the path, if it isn't already.
 cd /path/to/this/project
 python3 -m venv .venv-py3
 source .venv-py3/bin/activate
+pip install --upgrade pip
 pip install -r do/requirements.txt
 export PYTHONPATH="${PYTHONPATH}:$(pwd)"
 export PATH="${PATH}:/directory/containing/zedo/executable"
