@@ -52,7 +52,7 @@ I'm using rsync to optimize time-to-xfer.
 rsync -vrcL /this/repo/.zedo/build/* servername:/path/to/www/root
 ssh servername
 cd /path/to/www/root
-chown -R <user>:www-data .
+chown -R $USER:www-data .
 find . -type d -exec chmod 750 {} \;
 find . -type f -exec chmod 640 {} \;
 ```
