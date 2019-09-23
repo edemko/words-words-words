@@ -3,6 +3,7 @@ published: 2018-02-27
 updated: 2018-03-03
 updated: 2018-05-12
 updated: 2018-07-23
+updated: 2019-04-13
 tag: making
 
 <style>
@@ -77,3 +78,7 @@ This time, I definitely had the idea to make something with a bit of gear in it[
 Maybe I shouldn't be so averse to representational doodles.
 
 [^this-old-tony]: Am I watching too much [This Old Tony](https://www.youtube.com/channel/UC5NO8MgTQKHAWXp6z8Xl7yQ)?
+
+![An Autumn Spring](/static/doodles/015.png)
+I was on vacation and decided to spend some time outdoors with my favorite colors---green & blue.
+This one I really wanted to avoid having any preferred "up" direction, and I think I succeeded at that, though of course I'm limited in only being able to "hang" the doodle in one orientation.
