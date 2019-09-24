@@ -383,6 +383,16 @@ I'd recommend doing `ssh-copy-id -n` to do a dry run first.
 
 On first connecting to a machine, you must verify that machine's identity (see below).
 
+To add a public key to `authorized_keys`, I simply appended the key onto the file.
+I did make a backup first and verify that all machines can still log in.
+
+```sh
+cp ~/.ssh/authorized_keys ~/.ssh/authorized_keys.bak
+cat new_key.pub > ~/.ssh/authorized_keys
+# check logins still function
+rm new_key.pub ~/.ssh/authorized_keys.bak
+```
+
 !!! caution "To-Do"
     Why is `authorized_keys` special: is it hardcoded?, is it configured by sshd?
     What is the format of a public key, of various types of keys?
@@ -423,7 +433,7 @@ Between two secure parties is end-to-end, wheras with only one secure party, the
 
 It seems that party-to-party authentication in ProtonMail relies on the authenticity of the first contact to exchange public keys, and for that we trust the ProtonMail service.
 [This post](https://protonmail.com/blog/address-verification-pgp-support/) and [this support article](https://protonmail.com/support/knowledge-base/address-verification/) seem to indicate that trusted sender-key associations are stored similarly to ssh (where e.g. I decide to trust a server's key).
-For this, it seems the way to maintain security without necessarily trusting ProtonMail not to have been hacked is to verify they key through an independent connection, preferably secure.
+For this, it seems the way to maintain security without necessarily trusting ProtonMail not to have been hacked is to verify the key through an independent connection, preferably secure.
 The difference between this and authenticating communications in manual PGP is, it seems, not much.
 
 Private key storage is about what I'd expect.
