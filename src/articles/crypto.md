@@ -1,4 +1,5 @@
 title: Crypto Cookbook
+published: 2019-09-24
 tag: computing
 tag: notes
 
@@ -100,7 +101,7 @@ SELECT * FROM pw WHERE hash = digest('P@ssword', 'sha1');
 
 This took a while, and it seriously impacted my harddrive performance, especially during reindexing.
 Even just the initial data load took three hours before I went to bed.
-Now, though seraching for passwords happens very quickly:
+Now though, seraching for passwords happens very quickly:
 
 ```sql
 SELECT * FROM pw WHERE hash = digest('P@ssword', 'sha1');
@@ -175,7 +176,7 @@ Because the private key is sensitive, many guides recommend adding a passphrase 
 Both `ssh-keygen` and PuttyGen have this capability built-in.
 They ask for a passphrase that I assume is then given to a key derivation function, but leaving the passphrase blank skips the encryption step.
 Certainly on a computer on which I am not the sole administrator, I should encrypt my private key.
-The same holds for keys exist on an unencrypted storage medium with no physical access controls.
+The same holds for keys that exist on an unencrypted storage medium with no physical access controls.
 
 !!! caution "To-Do"
     I noticed that PuttyGen has a field for "comment".
@@ -421,7 +422,7 @@ I haven't yet figured out how email gets sent to insecure recipients.
 Between two secure parties is end-to-end, wheras with only one secure party, the best achievable is zero-access.
 
 It seems that party-to-party authentication in ProtonMail relies on the authenticity of the first contact to exchange public keys, and for that we trust the ProtonMail service.
-[This post](https://protonmail.com/blog/address-verification-pgp-support/) and [this support article](https://protonmail.com/support/knowledge-base/address-verification/)seem to indicate that trusted sender-key associations are stored similarly to ssh (where e.g. I decide to trust a server's key).
+[This post](https://protonmail.com/blog/address-verification-pgp-support/) and [this support article](https://protonmail.com/support/knowledge-base/address-verification/) seem to indicate that trusted sender-key associations are stored similarly to ssh (where e.g. I decide to trust a server's key).
 For this, it seems the way to maintain security without necessarily trusting ProtonMail not to have been hacked is to verify they key through an independent connection, preferably secure.
 The difference between this and authenticating communications in manual PGP is, it seems, not much.
 

@@ -21,3 +21,4 @@ images-from-north-ga
 notes-on-vcs-methodology
 power-on
 manufacturing-manifesto
+crypto
