@@ -12,6 +12,9 @@ md = markdown.Markdown(
         , "codehilite"
         , "markdown_checklist.extension"
         ],
+    extension_configs={
+        "codehilite": { "guess_lang": False },
+    },
     output_format="html5",
 )
 

@@ -16,7 +16,8 @@ The intermediary then needs to forward those requests back down home-intermediar
 
 The idea here is to set up a user whose only capability is to listen for tunnel establishment from the home machine.
 
-```sh
+```
+:::sh
 sudo adduser --disabled-password --no-create-home revssh-<home hostname>
 sudo mkdir -p /home/revssh-<home hostname>/.ssh
 sudo chown -R revssh-<home hostname>:revssh-<home hostname> /home/revssh-<home hostname>
@@ -106,14 +107,16 @@ All that is required is to give the laptop's public key to the intermediary serv
 
 On the home machine, connect to the intermediary:
 
-```sh
+```
+:::sh
 sudo ssh -fN -R <reverse tunnel entry port>:localhost:22 revssh-<home hostname>@<intermediary server>
 ```
 
 Obviously the intermediary server must be running.
 
 On the laptop, connect to the intermediary, then connect through the reverse tunnel to the home machine:
-```sh
+```
+:::sh
 ssh <intermediary server>
 ssh <user>@localhost -p <tunneling port>
 ```
@@ -125,7 +128,8 @@ TODO there's an annoying thing when I exit from my home machine where it clears 
 
 To close the tunnel:
 
-```sh
+```
+:::sh
 ps -aux | grep ssh -fN | grep -v grep
 # look for the pid
 sudo kill <pid>
@@ -133,7 +137,8 @@ sudo kill <pid>
 
 Or, if you're feeling brave:
 
-```sh
+```
+:::sh
 sudo kill `ps -aux | grep 'ssh -fN' | grep -v grep | awk '{print($2)}'`
 ```
 
@@ -153,7 +158,8 @@ Create a file `/etc/network/if-up.d/revssh-tunnel`.
 Change the owner/group to `root` and give it execute permissions.
 Then, put the following in:
 
-```sh
+```
+:::sh
 #!/bin/sh
 autossh -fN M <some unused home machine port> -R <reverse tunnel entry port>:localhost:22 revssh-<home hostname>@<intermediary server>
 ```
