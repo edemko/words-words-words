@@ -1,7 +1,7 @@
 title: Thinking With Types
+published: 2019-01-15
 tag: computing
 tag: types
-published:2019-01-15
 
 I'm not sure many people understand types on anything more than a surface emotional level.
 They either like types, or they don't like them, and they can rationalize their feelings, but at the end of they day, I've seen few people who could convince me either way.

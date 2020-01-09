@@ -1,7 +1,7 @@
 title: Privacy & Fashion
+published: 2019-01-19
 tag: thinking
 tag: privacy
-published: 2019-01-19
 
 I once caught myself accidentally eavesdropping on someone playing Pokèmon Go, and my metal reaction was "People are still playing that?, isn't it not cool?".
 Well, that was my first thought anyway.

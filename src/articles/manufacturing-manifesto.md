@@ -1,8 +1,8 @@
 title: Toolmakers’ Manifesto
+published: 2019-01-20
 tag: making
 tag: computing
 tag: thinking
-published: 2019-01-20
 
 People want to get things done.
 Often, a person can get a thing done faster or easier by using a machine.

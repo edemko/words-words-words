@@ -1,6 +1,6 @@
 title: Images from Georgian Woods
-tag: haiku
 published: 2019-01-19
+tag: haiku
 
 On my solo vacation Sep'18 I did a lot of walking around in nature and not worrying about things.
 At Pine Log Creek, I wrote a number of "images".
@@ -14,7 +14,7 @@ These aren't really haiku, but they are extemporaneous, simple, nature-related, 
 
 <!-- -->
 
-  > The sprouts of moss, tree stumps taller than me collapsing inwards; how different is looks coming back the other way!
+  > The sprouts of moss, tree stumps taller than me collapsing inwards; how different it looks coming back the other way!
 
 <!-- -->
 

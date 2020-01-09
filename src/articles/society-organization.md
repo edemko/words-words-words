@@ -1,10 +1,10 @@
 title: Notes on the Organization of Groups of Mostly Strangers
+published: 2019-01-15
+updated: 2019-01-20
 tag: notes
 tag: human factors
 tag: ideosphere
 tag: thinking
-published: 2019-01-15
-updated: 2019-01-20
 
 Groups of mostly strangers---a.k.a. communities, societies, civilizations---are a fascinating object of study in my explorations of design.
 The fundamental principles of organizing a society---a.k.a. ideology---are not well-known.

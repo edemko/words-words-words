@@ -7,6 +7,7 @@ updated: 2018-03-24
 updated: 2018-05-05
 updated: 2018-06-23
 updated: 2018-10-13
+updated: 2020-01-09
 tag: reference
 tag: notes
 
@@ -65,3 +66,6 @@ Scope Meiosis
 
 Weekenday
 :   English portmanteau: day that is on the weekend (c.f. weekday)
+
+Lachesism
+:   in reference to the Greek Fate Lachesis: the desire to be struck by disaster, thereby triggering one's life to become more meaningful

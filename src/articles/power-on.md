@@ -1,8 +1,8 @@
 title: Power-On Process
+published: 2019-01-20
 tag: electronics
 tag: computing
 tag: notes
-published: 2019-01-20
 
 When you turn your computer on, the very first thing that happens is that the incoming power wire gets voltage:
 

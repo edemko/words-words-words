@@ -1,8 +1,8 @@
 title: Compatibility vs. Change
+published: 2019-01-15
 tag: computing
 tag: human factors
 tag: notes
-published: 2019-01-15
 
 
 There's a reason why people like backwards-compatibility.

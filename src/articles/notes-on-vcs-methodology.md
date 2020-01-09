@@ -1,7 +1,7 @@
 title: Notes on Version Control Methodology
+published: 2019-01-20
 tag: notes
 tag: computing
-published: 2019-01-20
 
 In the course of normal programming, the history of a repo is not very important.
 During root cause analysis or forensics, the history of the repo becomes much more important, as it is a source of evidence.
