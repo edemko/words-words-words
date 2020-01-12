@@ -15,7 +15,8 @@ Without further ado, here's my FizzBuzz[^catering]:
 
 [^catering]: It's in Haskell, and I'm not bothering to cater to your ignorance of the language.
 
-```haskell
+```
+:::haskell
 main :: IO ()
 main =  print `mapM_` fizzbuzz [1..100]
 

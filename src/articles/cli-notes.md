@@ -7,12 +7,14 @@ tag: reference
 List files installed by a package:
 
 ```
+:::sh
 dpkg -L some-package
 ```
 
 Find out what (installed) packages depend on a given package:
 
 ```
+:::sh
 apt-cache rdepends  --installed some-package
 ```
 
@@ -22,6 +24,7 @@ apt-cache rdepends  --installed some-package
 Find out what device a file or folder is on:
 
 ```
+:::sh
 df /path/to/filename
 ```
 

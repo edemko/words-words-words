@@ -16,7 +16,8 @@ I just want to look at the thought process behind one particular, widespread per
 
 Here's some code in an untyped language:
 
-```python
+```
+:::python
 def force(thunk):
     """forall a. Thunk a -> a
         where Thunk a = () -> a
@@ -26,7 +27,8 @@ def force(thunk):
 
 If someone notices my "type annotation" and tells me "Python doesn't have types. Stop thinking in terms of types.", that's fine.
 
-```python
+```
+:::python
 force(3)
 ```
 
