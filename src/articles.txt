@@ -24,3 +24,4 @@ manufacturing-manifesto
 crypto
 ssh-reverse-tunnel
 lang-design-notes
+cli-notes

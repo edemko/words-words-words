@@ -10,6 +10,19 @@ tag: notes
 I want to build a systems programming language suitable for implementing runtime systems.
 The goal is to be platform-agnostic, have theory-motivated parametricity, exitwhen (incl. exiting out of functions), clear semantics for built-in arithmetic, and good control of individual bits, all with a more coherent ergonomic design than C (and esp. better than C++).
 
+## Some interesting numbers
+
+An octet has 8 bits.
+What is the smallest addressable unit of memory in a machine?
+This is often, but not always an octet (e.g. digital signal processors, historical computers).
+In common usage a byte is often understood as an octet, but the term has a longer history as the name for the smallest addresable unit.
+
+So far, this assumes that a machine has only one memory bank.
+In general, though, a machine might have different numbers for different types of memory (e.g. main memory, various video memories, peripheral device interfaces exposed as memory).
+
+Since only bits are theoretically indivisible units of (classical) information, they should be used as a foundation.
+Octets, bytes, and other concepts must be built on top of them.
+
 ## Sizeof/Alignof Lives at the Kind Level
 
 I've noticed that C is interested in opaque vs. concrete types, and that the error messages behave like kind errors.
@@ -29,6 +42,52 @@ r ::= Opaque
 The thing I may have to think more about is bit-packing.
 Of course the alignment is nothing (i.e. single-bit), but the reason I have σ in there is b/c
     I think the compiler will need to know how to unpack the value into a register: sign- or zero-extend.
+
+## Portable Pointer Techniques
+
+In general, pointers might not be straightforward integers.
+For example, you might expect all pointers (perhaps of some type, i.e. ptrs to gc objects) to be 16-octet aligned.
+A octet-addressable platform might represent these as always having four low-order bits be zero, but a system which can only address 4-octet words might have only two low-order bits zero.
+Long story short, you shouldn't to pack too big a tag into a tagged pointer, but the space you have available is system-dependent.
+The C technique of casting `void*` to `uintptr_t`, masking, and casting back to `void*` to extract the pointer form a tagged pointer is technically undefined.
+
+Normal C pointer arithmetic is only in increments of the size of the pointed-to data.
+Pointer arithmetic in terms of bytes is sometimes needed as well, and for this C programmers will cast to `char*` before doing arithmetic.
+While compliant, it's not what I'd call friendly.
+Besides which, packed dependent tuples may require pointer arithmetic on _bits_, for which I know of no compliant technique.
+
+Perhaps what I'm getting at is that there are a number of pointer types, each of which with a different alignment and with possibly different representations.
+For example, packing four bits into a 16-octet-aligned pointer into `N` bits if that pointer would be represented with `N - 4` non-zero (implicit or explicit) zero bits.
+
+So then, even pointer types are parameterized by a representation.
+
+```
+Ptr : ∀(a : ∃r × TYPE r) → ∀(ρ : PtrRep) -> a -> TYPE ρ.represent
+PtrFmt = record
+  { size : ℕ
+  , lowzeros : ℕ
+  , implicitzeros : ℕ
+  }
+```
+
+So, for example,
+
+```
+struct Taggedptr<a> {
+  ptr: Ptr {size = 60, lowz = 4, implicitz = 3} a
+  tag: Bit⁴
+}
+```
+
+packs a tag into the four low-order bits of a pointer.
+Extracting the pointer requries those four bits to be interpreted as zero regardless of the tag.
+Then, since this is a pointer to an octet, the address of the bit it points to is 8 times larger, adding three implicit zeros.
+The pointer itself can hold addresses up to `2^64` octets.
+
+One remaining class of operation is `containerof`.
+Essentially, if you know you have a member of a known struct, you can backsolve to find the containing struct.
+Similarly, a pointer to garbage collected memory might have a header at the beginning of the block that helps describe the pointer, so aligning the pointer backwards can give a predictable pointed-to type.
+
 
 ## Compiling Exit-When With `always` Clauses
 

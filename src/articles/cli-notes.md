@@ -1,6 +1,8 @@
-title: CLI Cheatsheets
+title: CLI Cheatsheet
+published: 2020-04-07
 tag: computing
 tag: reference
+tag: notes
 
 ## Apt/Dpkg
 
@@ -9,6 +11,13 @@ List files installed by a package:
 ```
 :::sh
 dpkg -L some-package
+```
+
+Find uot which package installed a given file:
+
+```
+:::sh
+dpkg -S /some/file
 ```
 
 Find out what (installed) packages depend on a given package:
