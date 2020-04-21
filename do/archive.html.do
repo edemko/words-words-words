@@ -6,23 +6,24 @@ import json
 import re
 import makoc
 import zedo
+class Object: pass
 
-class Object:
-    pass
 
-def main(outFp):
+def main():
+    print("ARCHIVE", file=zedo.rooterr)
+    zedo.ifchange("templates/base.html.mako", "templates/archive.html.mako")
     published = "articles.txt"
-    published = zedo.ifchange(published, find=True)
+    zedo.ifchange(published)
     with open(published, 'rt', encoding="utf-8") as fp:
         lines = fp.readlines()
     by_date, by_tag = render_links(lines)
     html = makoc.compile("archive.html.mako", by_date=by_date, by_tag=by_tag)
-    outFp.write(html)
+    sys.stdout.write(html)
 
 def render_links(lines):
     objs, by_tag = [], dict()
     lines = list(line.strip(" \t\n\r") for line in lines if line.strip(" \t\n\r"))
-    zedo.ifchange(*("articles/{}.html".format(line) for line in lines), find=True)
+    zedo.ifchange(*("articles/{}.html".format(line) for line in lines))
     for line in lines:
         obj, tags = render_link(line)
         objs.insert(0, obj)
@@ -34,8 +35,7 @@ def render_links(lines):
 
 def render_link(line):
     articleUrl = "articles/{}.html".format(line)
-    articleHtml = path.join(".zedo", "build", articleUrl) # FIXME
-    articleMeta = articleHtml + ".meta"
+    articleMeta = path.join("articles", line+".html.meta")
     with open(articleMeta, 'rt', encoding="utf-8") as meta:
         meta = json.loads(meta.read())
     obj = Object()
@@ -47,7 +47,4 @@ def render_link(line):
 
 
 if __name__ == "__main__":
-    zedo.ifchange("templates/base.html.mako")
-    zedo.ifchange("templates/archive.html.mako")
-    with open(sys.argv[1], 'wt', encoding="utf-8") as outFp:
-        main(outFp)
+    main()

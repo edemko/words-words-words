@@ -20,9 +20,8 @@ python3 -m venv .venv-py3
 source .venv-py3/bin/activate
 pip install --upgrade pip
 pip install -r do/requirements.txt
-export PYTHONPATH="${PYTHONPATH}:$(pwd)"
-export PATH="${PATH}:/directory/containing/zedo/executable"
-zedo init
+export PYTHONPATH+=":$PWD"
+export PATH+=":$PWD/zedo-shim/bin"
 ```
 
 Something I haven't yet implemented in zedo is the ability to produce a distribution.

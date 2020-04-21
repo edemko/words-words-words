@@ -4,7 +4,6 @@ from datetime import date, time, datetime, timezone
 from feedgen.feed import FeedGenerator
 import json
 
-
 def main(outDir, articles):
     fg = init_feed()
     for articlePath in articles:

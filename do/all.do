@@ -3,16 +3,18 @@ set -e
 
 zedo phony
 
-echo >&2 'articles/*.md'
-(cd src; zedo ifchange articles/*.md)
-
-echo >&2 "index.html"
-zedo ifchange index.html
-echo >&2 "archive.html"
-zedo ifchange archive.html
-echo >&2 "about.html"
-zedo ifchange about.html
-echo >&2 "feeds"
 zedo ifchange feeds
-echo >&2 "working.html"
+# zedo ifchange archive.html
 zedo ifchange working.html
+
+echo >&3 "MISC"
+zedo ifchange index.html
+zedo ifchange about.html
+
+
+echo >&3 "Accumulating assets and static files…"
+for f in "$ZEDO__ROOT/$SRC/"{assets,static}/**/*; do
+    if ! [ -f "$f" ]; then continue; fi
+    f="${f#$ZEDO__ROOT/$SRC/}"
+    zedo if-change "src:$f"
+done

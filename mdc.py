@@ -11,6 +11,7 @@ md = markdown.Markdown(
         , "admonition"
         , "codehilite"
         , "markdown_checklist.extension"
+        # FIXME add math formatting
         ],
     extension_configs={
         "codehilite": { "guess_lang": False },
