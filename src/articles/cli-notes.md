@@ -13,7 +13,7 @@ List files installed by a package:
 dpkg -L some-package
 ```
 
-Find uot which package installed a given file:
+Find out which package installed a given file:
 
 ```
 :::sh
@@ -44,3 +44,40 @@ df /path/to/filename
 
 [This stack overflow answer](https://superuser.com/a/181543) says to use `inotifywait`, but mentions some problems, and it's not installed on my main machine by default.
 It also mentions `fswatch` and `incron`, but again these are not everywhere.
+
+## Using `mini-httpd` in scripts
+
+First off, on some systems it's `mini-httpd`, and some its `mini_httpd`.
+In any case, if you run it from a script (from a script from a script from a…), then you need a way to shut it down nicely.
+Otherwise, you need to find it with
+
+```
+ps -ef | grep mini[_-]httpd | awk '{print $2}' | xargs kill
+ps -ef | grep [d]efunct | awk '{print $3}' | xargs kill
+```
+
+repeating the second until there are no more defunct processes.
+
+However, you could do the following when starting httpd:
+
+```
+_term() {
+  echo "Caught SIGTERM signal!"
+  kill "$child" 2>/dev/null
+  exit 0
+}
+trap _term TERM INT HUP QUIT EXIT KILL
+
+port=10080
+echo >&3 "Starting server on port $port..."
+echo >&3 "(Ctrl-C to exit)"
+"$HTTPD" -D -u "$USER" -p "$port" -d <DIR> &
+child=$!
+wait "$child"
+```
+
+I'm not entirely sure which signals I really have to wait on, but this seems to work.
+It may even be useful in more general cases.
+
+This was taken from [this stack overflow answer](https://unix.stackexchange.com/a/146770).
+There are more comments and tweaks mentioned there, but it's worked well enough so far.

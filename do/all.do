@@ -3,9 +3,9 @@ set -e
 
 zedo phony
 
-zedo ifchange feeds
-# zedo ifchange archive.html
+zedo ifchange archive.html
 zedo ifchange working.html
+zedo ifchange feeds
 
 echo >&3 "MISC"
 zedo ifchange index.html
