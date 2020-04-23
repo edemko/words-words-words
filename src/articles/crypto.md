@@ -250,6 +250,7 @@ In particular:
 
 !!! note "Links"
     * [Let's Encrypt](https://letsencrypt.org/)
+    * [Certbot](https://certbot.eff.org/)
 
 
 ### SSH Agents
@@ -284,6 +285,7 @@ I don't seem to have notes on it, but I believe it is possible to add a key dire
 !!! caution "To-Do"
     What is this about gpg keyrings?
     How do I manage them?
+    Apparently, they exist in `~/.gnupg/`
 
 You should have obtained checksums and a signature on those checksums from a trusted source.
 I saw recommended somewhere to always get these from the original site, not a mirror.

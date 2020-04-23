@@ -11,6 +11,9 @@
     - [x] sed the triple-tick+lang to whatever format the current extension needs
     - [x] re-audit all my code blocks
 - [ ] create a suite of my own keys and publish them on [About](/about.html)
+    - [x] secure distribution requires https
+    - [ ] learn how to manage these keys
+    - [ ] finally, create and publish the key
 - [ ] version 1.0
     - [ ] everything above
     - [ ] move this list to github project board
