@@ -1,4 +1,5 @@
 <%inherit file="/base.html.mako"/>
+<%namespace name="archive" file="archive.html.mako"/>
 
 ${content|n}
 
@@ -19,5 +20,9 @@ ${content|n}
 
 % if pinned:
 <h3>Pinned Articles</h3>
-## TODO pinned articles
+<ul>
+    % for article in pinned:
+    ${archive.mkhref(article)}
+    % endfor
+</ul>
 % endif

@@ -86,7 +86,7 @@ Mitigations include:
 
 ### Pwned Passwords
 
-Never type you password into a third-party service.
+Never type your password into a third-party service.
 Admittedly, [Pwned Passwords](https://haveibeenpwned.com/Passwords) is open-source and allegedly implements anonymity, but I haven't personally audited the source code, so I'll use it locally.
 Therefore, I downloaded the database and loaded it into postgresql to I could search it quickly.
 
@@ -108,7 +108,7 @@ SELECT * FROM pw WHERE hash = digest('P@ssword', 'sha1');
 ```
 
 !!!warning
-    When done, don't forget to clear you psql history, otherwise that's a place where your passwords are stored in cleartext:
+    When done, don't forget to clear your psql history, otherwise that's a place where your passwords are stored in cleartext:
 
     ```
     echo '' > ~/.psql_history
@@ -204,7 +204,7 @@ In gpg, these end up imported and published to key servers in much the same way 
 
 !!!note "To-Do"
     Why aren't revocation certificates guarded by a passphrase?
-    I haven't even seem this mentioned, much less recommended or implemented.
+    I haven't even seen this mentioned, much less recommended or implemented.
 
 
 ### Fingerprinting Keys
@@ -429,7 +429,7 @@ I should have known, but ProtonMail does end-to-end and zero-access encryption w
 When emailing someone in ProtonMail, you have the service find the recipient's public key and use that to encrypt.
 Incoming insecure messages are encrypted with your public key immediately on reciept.
 I haven't yet figured out how email gets sent to insecure recipients.
-Between two secure parties is end-to-end, wheras with only one secure party, the best achievable is zero-access.
+Between two secure parties is end-to-end, whereas with only one secure party, the best achievable is zero-access.
 
 It seems that party-to-party authentication in ProtonMail relies on the authenticity of the first contact to exchange public keys, and for that we trust the ProtonMail service.
 [This post](https://protonmail.com/blog/address-verification-pgp-support/) and [this support article](https://protonmail.com/support/knowledge-base/address-verification/) seem to indicate that trusted sender-key associations are stored similarly to ssh (where e.g. I decide to trust a server's key).

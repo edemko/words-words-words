@@ -1,8 +1,8 @@
 ## TODO
 
-- [ ] home page
+- [x] home page
     - [x] latest article, with max-height
-    - [ ] pinned articles
+    - [x] pinned articles
     - [x] welcome text
 - [ ] clean up the archive
     - [ ] properly sorted by date, not just by entry into the file

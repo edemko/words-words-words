@@ -58,7 +58,8 @@ Nevertheless, in my experience the cost of not performing static type checks is 
 
   * writing boilerplate documentation,
   * writing boilerplate tests,
-  * tedious defensive programming, and
+  * tedious defensive programming
+  * disentangling layers of abstraction, and
   * fixing type errors.
 
 [^today-problems]: Let's be honest: the mainstream type systems are awful, the good production-ready ones do have some real limitations, and the ones without limitation are not yet ergonomic. Though about that last category, I have recently (2020-04-23) been using Idris2, and am quite enjoying it; though if you try it without some knowledge in dependent type theory, be prepared for some serious learning curve.
