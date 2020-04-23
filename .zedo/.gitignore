@@ -1,3 +1,4 @@
 config-local
 log/
-when-done/
+.done/
+.when-done/
