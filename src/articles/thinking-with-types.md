@@ -1,11 +1,15 @@
 title: Thinking With Types
 tag: computing
 tag: types
-published:2019-01-15
+published: 2019-01-15
+updated: 2020-04-23
 
 I'm not sure many people understand types on anything more than a surface emotional level.
-They either like types, or they don't like them, and they can rationalize their feelings, but at the end of they day, I've seen few people who could convince me either way.
+They either like types, or they don't like them, and they can rationalize their feelings, but at the end of they day, I've seen few people[^few-people] who could convince me either way.
 The only reliable information I have is my own experience programming.[^what-experience]
+
+[^few-people]: That'd be John Reynolds in [Types, Abstraction, and Polymorphism](https://commie.club/papers/reynolds83:parametricity.pdf).
+Robert Harper's [PFPL](https://www.cs.cmu.edu/~rwh/pfpl/2nded.pdf) in part nine makes some interesting arguments, but I think falls just short of the finish line.
 
 [^what-experience]: In case you're curious, that's 19 years using 17 languages across several paradigms.
 
@@ -16,8 +20,7 @@ I just want to look at the thought process behind one particular, widespread per
 
 Here's some code in an untyped language:
 
-```
-:::python
+```python
 def force(thunk):
     """forall a. Thunk a -> a
         where Thunk a = () -> a
@@ -27,8 +30,7 @@ def force(thunk):
 
 If someone notices my "type annotation" and tells me "Python doesn't have types. Stop thinking in terms of types.", that's fine.
 
-```
-:::python
+```python
 force(3)
 ```
 
@@ -59,4 +61,4 @@ Nevertheless, in my experience the cost of not performing static type checks is 
   * tedious defensive programming, and
   * fixing type errors.
 
-[^today-problems]: Let's be honest: the mainstream type systems are awful, the good production-ready ones do have some real limitations, and the ones without limitation are not yet ergonomic.
+[^today-problems]: Let's be honest: the mainstream type systems are awful, the good production-ready ones do have some real limitations, and the ones without limitation are not yet ergonomic. Though about that last category, I have recently (2020-04-23) been using Idris2, and am quite enjoying it; though if you try it without some knowledge in dependent type theory, be prepared for some serious learning curve.

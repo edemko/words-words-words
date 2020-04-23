@@ -149,8 +149,7 @@ Sometimes it might even be an idea that is almost good enough to cover the oppor
 
 We already have a library for
 
-```
-:::haskell
+```haskell
 data These a b --  a + b + ab = Either + Pair
     = This a
     | That b
@@ -159,8 +158,7 @@ data These a b --  a + b + ab = Either + Pair
 
 But I've occaisionally wanted:
 
-```
-:::haskell
+```haskell
 data Neither a b -- a + b + 1 = Either + Const (Const 1)
     = One a
     | Another b

@@ -90,8 +90,7 @@ Never type you password into a third-party service.
 Admittedly, [Pwned Passwords](https://haveibeenpwned.com/Passwords) is open-source and allegedly implements anonymity, but I haven't personally audited the source code, so I'll use it locally.
 Therefore, I downloaded the database and loaded it into postgresql to I could search it quickly.
 
-```
-:::sql
+```sql
 COPY pw (hash, count) FROM 'pwned-passwords-sha1-<version>.txt' WITH DELIMITER ':';
 CREATE EXTENSION pgcrypto;
 ALTER TABLE pw ALTER COLUMN hash SET DATA TYPE bytea USING decode(hash, 'hex');
@@ -104,8 +103,7 @@ This took a while, and it seriously impacted my harddrive performance, especiall
 Even just the initial data load took three hours before I went to bed.
 Now though, seraching for passwords happens very quickly:
 
-```
-:::sql
+```sql
 SELECT * FROM pw WHERE hash = digest('P@ssword', 'sha1');
 ```
 
@@ -388,8 +386,7 @@ On first connecting to a machine, you must verify that machine's identity (see b
 To add a public key to `authorized_keys`, I simply appended the key onto the file.
 I did make a backup first and verify that all machines can still log in.
 
-```
-:::sh
+```sh
 cp ~/.ssh/authorized_keys ~/.ssh/authorized_keys.bak
 cat new_key.pub > ~/.ssh/authorized_keys
 # check logins still function

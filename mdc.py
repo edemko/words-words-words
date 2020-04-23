@@ -1,5 +1,5 @@
 from os import path
-import markdown
+import markdown, re
 
 md = markdown.Markdown(
     extensions=
@@ -24,7 +24,13 @@ md = markdown.Markdown(
 )
 
 
+GFM2CODEHILITE = re.compile(r'^```([a-zA-Z0-9_-]+)$', flags=re.MULTILINE)
+
 def compile(input):
+    # NOTE this is to translate github-flavored codeblock syntax to codehilite syntax
+    # and _why_ did they make this stuff up? were they earlier than github and decided to stick with it despite hell and high water?
+    input = GFM2CODEHILITE.sub('```\n:::\\1', input)
+
     content = md.convert(input)
     meta = md.Meta
     prepare_meta(meta)

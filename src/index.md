@@ -6,12 +6,16 @@
 ### TODO
 
 - [ ] series framework
-- [ ] better language selection for code blocks
-    - [ ] sed the triple-tick+lang to whatever format the current extension needs
-    - [ ] re-audit all my code blocks
+    - [ ] `all-articles` do-script
+    - [ ] file that describes which articles are in which series
+        - I would generate from tags, but that would mean tags get interpreted twice
+        - alternately, a folder for each series with files `my-series.md, my-series/01.md, my-series/02.md, ...`
 - [ ] home page
     - [ ] latest article, with max-height
     - [ ] pinned articles
+- [x] better language selection for code blocks
+    - [x] sed the triple-tick+lang to whatever format the current extension needs
+    - [x] re-audit all my code blocks
 - [x] mathematics markdown (see [this mess](/articles/clock-design.html))
     - [ ] the MathJax font looks a bit awful next to real computer modern
     - [ ] I'd love to render math locally and ship only the resulting svg

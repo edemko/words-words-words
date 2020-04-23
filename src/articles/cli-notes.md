@@ -8,22 +8,19 @@ tag: notes
 
 List files installed by a package:
 
-```
-:::sh
+```sh
 dpkg -L some-package
 ```
 
 Find out which package installed a given file:
 
-```
-:::sh
+```sh
 dpkg -S /some/file
 ```
 
 Find out what (installed) packages depend on a given package:
 
-```
-:::sh
+```sh
 apt-cache rdepends  --installed some-package
 ```
 
@@ -32,8 +29,7 @@ apt-cache rdepends  --installed some-package
 
 Find out what device a file or folder is on:
 
-```
-:::sh
+```sh
 df /path/to/filename
 ```
 
@@ -51,7 +47,7 @@ First off, on some systems it's `mini-httpd`, and some its `mini_httpd`.
 In any case, if you run it from a script (from a script from a script from a…), then you need a way to shut it down nicely.
 Otherwise, you need to find it with
 
-```
+```sh
 ps -ef | grep mini[_-]httpd | awk '{print $2}' | xargs kill
 ps -ef | grep [d]efunct | awk '{print $3}' | xargs kill
 ```
@@ -60,7 +56,7 @@ repeating the second until there are no more defunct processes.
 
 However, you could do the following when starting httpd:
 
-```
+```sh
 _term() {
   echo "Caught SIGTERM signal!"
   kill "$child" 2>/dev/null

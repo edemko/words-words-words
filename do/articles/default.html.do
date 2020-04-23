@@ -26,6 +26,7 @@ with open(srcFile, 'rt', encoding="utf-8") as fp:
 article = Object()
 article.title = meta.get('title', "Untitled")
 article.published = meta.get('published', "unpublished")
+article.updated = ", ".join(meta.get('updated', []))
 article.tags = ", ".join(meta.get('tags', []))
 article.content = html
 
