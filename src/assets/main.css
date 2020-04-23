@@ -54,6 +54,16 @@ nav > ul,
     overflow-x: auto;
 }
 
+/* Display the archive table of contents as an inline list. */
+.jumpto > ul > li {
+    display: inline-block;
+    list-style: none;
+}
+.jumpto > ul > li::after { content: ","; }
+.jumpto > ul > li:last-child::after { content: ""; }
+.jumpto > ul > li.section::after { content: ":"; }
+
+
 /* It's nice to indent and separate paragraphs.
     Unfortunately, more than just <p> tags are logical paragraphs.
 */

@@ -79,7 +79,7 @@ obsolete
 removed
 :   * New features may now be introduced under the same identifier.
 
-[^support]: Here, I'm using "support" to indicate that active maintenance is being done, whereas merely not deleting is is "available".
+[^support]: Here, I'm using "support" to indicate that active maintenance is being done, whereas merely not deleting it is "available".
 
 One guiding principle I've used here is that it's all fun and games until it becomes standard; then we've got to be strict about the lifecycle.
 

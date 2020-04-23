@@ -4,9 +4,9 @@
     - [x] latest article, with max-height
     - [x] pinned articles
     - [x] welcome text
-- [ ] clean up the archive
-    - [ ] properly sorted by date, not just by entry into the file
-    - [ ] max-height for each by-\*, or at least link to them as headers
+- [x] clean up the archive
+    - [x] properly sorted by date, not just by entry into the file
+    - [x] max-height for each by-\*, or at least link to them as headers
 - [x] better language selection for code blocks
     - [x] sed the triple-tick+lang to whatever format the current extension needs
     - [x] re-audit all my code blocks

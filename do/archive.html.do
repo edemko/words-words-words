@@ -26,11 +26,14 @@ def render_links(lines):
     zedo.ifchange(*("articles/{}.html".format(line) for line in lines))
     for line in lines:
         obj, tags = render_link(line)
-        objs.insert(0, obj)
+        objs.append(obj)
         for tag in tags:
             if tag not in by_tag:
                 by_tag[tag] = []
-            by_tag[tag].insert(0, obj)
+            by_tag[tag].append(obj)
+    objs = sorted(objs, key=lambda obj: obj.published, reverse=True)
+    for tag, objs in by_tag.items():
+        by_tag[tag] = sorted(objs, key=lambda obj: obj.published, reverse=True)
     return objs, by_tag
 
 def render_link(line):

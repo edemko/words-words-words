@@ -20,8 +20,8 @@ def main():
     zedo.ifchange(published)
     with open(published, 'rt', encoding="utf-8") as fp:
         lines = fp.readlines()
-    latest = load_latest(lines)
-    with open(latest.mdFile, 'rt', encoding='utf-8') as fp:
+    latest = render_links(lines)[0]
+    with open("articles/{}.md".format(latest.basename), 'rt', encoding='utf-8') as fp:
         latest.html, _ = mdc.compile(fp.read())
 
     pinned = "pinned.txt"
@@ -39,30 +39,6 @@ def main():
     sys.stdout.write(html)
 
 
-def load_latest(lines):
-    latest, filepath = None, None
-    lines = list(line.strip(" \t\n\r") for line in lines if line.strip(" \t\n\r"))
-    zedo.ifchange(*("articles/{}.html".format(line) for line in lines))
-    for line in lines:
-        obj = load_article(line)
-        if latest is None or latest.published < obj.published:
-            latest = obj
-    latest.mdFile = "articles/{}.md".format(line)
-    return latest
-
-def load_article(line):
-    articleUrl = "articles/{}.html".format(line)
-    articleMeta = path.join("articles", line+".html.meta")
-    with open(articleMeta, 'rt', encoding="utf-8") as meta:
-        meta = json.loads(meta.read())
-    obj = Object()
-    obj.title = meta['title']
-    obj.url = articleUrl
-    obj.published = meta['published']
-    obj.updated = meta['updated']
-    obj.tags = meta['tags']
-    return obj
-
 def render_links(lines):
     objs = []
     lines = list(line.strip(" \t\n\r") for line in lines if line.strip(" \t\n\r"))
@@ -78,6 +54,7 @@ def render_link(line):
     with open(articleMeta, 'rt', encoding="utf-8") as meta:
         meta = json.loads(meta.read())
     obj = Object()
+    obj.basename=line
     obj.title = meta['title']
     obj.url = articleUrl
     obj.published = meta['published']
