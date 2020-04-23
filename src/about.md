@@ -25,22 +25,25 @@ There is no comment system.
 If you wish to have a conversation with me like a normal human, see my contact details below.
 If you wish to have a conversation with some friends, go get in contact with them as you do.
 
-RSS and Atom are nice because they are open standards (not walled gardens), and put you (not some algorithm) in control of your media feed.
+RSS and Atom are nice because they are open standards (not walled gardens), and put you (not opaque, proprietary software) in control of your media feed.
 Email is nice because everyone[^everyone] uses it, so it leaves no one out.
 Finally, email also already has good spam filtering and input validation, so I don't have to reinvent those wheels and can spend my time on more meaningful pursuits.
 
 [^everyone]: Not actually everyone. Just everyone who could reasonably become invested in reading this site.
 
 
-This site does **not** need Javascript, nor does it even attempt to use it.
+This site almost[^almost-js-free] does **not** need Javascript.
 This site uses CSS, but it does **not** require it to be readable.
 This site renders pleasantly on desktops, mobile, and even in the terminal.
 I have made no attempt to make the site work on older browsers: update your browser.
 Not only will the site be styled nicely, but more importantly, an up-to-date browser is required to be secure on the internet.
 
+[^almost-js-free]: Dang it! Annoyingly, I'm using MathJax to render mathematical formulae.
+But, if you can read LaTex reasonably well, you still don't need it.
+
 The site's source code is open-source, hosted on [GitHub](https://github.com/Zankoku-Okuno/blag).
 The site content is written entirely in markdown.
-It is compiled to static files using a redo-based build script coordinating sh and python.
+It is compiled to static files using a [zedo](https://github.com/Zankoku-Okuno/zedo)-based build script coordinating bash and python.
 
 
 ## What about me?
@@ -57,7 +60,7 @@ img.avatar {
 My handle is Okuno Zankoku.[^name]
 My education is in physics, I'm a programmer by trade, and I enjoy creative pursuits.
 I chase ideas to their foundations.
-My media include: formal languages, epistemology, type theory, software, firmware, digital electronics, linguistics, fabric, and words.
+My media include: formal languages, epistemology, type theory, software, firmware, digital electronics, linguistics, wood, plexi, fabric, and words.
 
 <ul style="list-style: none;">
     <li>

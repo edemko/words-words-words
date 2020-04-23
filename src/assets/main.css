@@ -7,7 +7,7 @@ body {
     max-width: 50em;
     padding: 0px 1.5em;
     margin: auto;
-    margin-bottom: 10vh;
+    margin-bottom: 50vh;
 }
 
 /* The navigation links should be nice and evenly spaced across the top. */
@@ -89,6 +89,21 @@ nav > ul,
     margin-left: 1.5em;
 }
 
+div.include-article {
+    margin: 0em 1em;
+    border: thin lightgrey solid;
+    border-radius: 5px;
+    border-image: linear-gradient(to bottom, lightgrey, rgba(0,0,0,0)) 1;
+    padding: 0em 1em 0em 1em;
+}
+div.include-article > .content {
+    max-height: 40vh;
+    overflow-y: hidden;
+}
+div.include-article > div.read-more {
+    text-align: right;
+    margin-top: 0.5em;
+}
 
 
 

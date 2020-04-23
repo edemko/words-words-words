@@ -42,6 +42,7 @@ def render_link(line):
     obj.title = meta['title']
     obj.url = articleUrl
     obj.published = meta['published']
+    obj.updated = meta['updated']
     obj.tags = meta['tags']
     return obj, meta['tags']
 
