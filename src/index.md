@@ -5,13 +5,20 @@
 
 ### TODO
 
-- [x] title needs the markdown treatment (esp. for typography) rather than going directly into html
-    - [ ] I should figure something out about removing the bad `<p>` tags
-    - [x] for now, I've just put `’` in place of `'`
+- [ ] series framework
+- [ ] better language selection for code blocks
+    - [ ] sed the triple-tick+lang to whatever format the current extension needs
+    - [ ] re-audit all my code blocks
 - [ ] home page
     - [ ] latest article, with max-height
     - [ ] pinned articles
-- [ ] create a post on how this site works, both content and framework
+- [x] mathematics markdown (see [this mess](/articles/clock-design.html))
+    - [ ] the MathJax font looks a bit awful next to real computer modern
+    - [ ] I'd love to render math locally and ship only the resulting svg
+    - [ ] otherwise, I'd like to supply the MathJax files locally rather than rely on someone else's cdn
+- [x] title needs the markdown treatment (esp. for typography) rather than going directly into html
+    - [ ] I should figure something out about removing the bad `<p>` tags
+    - [x] for now, I've just put `’` in place of `'`
 - [x] make a post on the procedures for asymmetric key cryptography
 - [ ] create a suite of my own keys and publish them on [About](/about.html)
 - [x] python interface to zedo
@@ -19,14 +26,12 @@
 - [ ] clean up the archive
     - [ ] properly sorted by date, not just by entry into the file
     - [ ] max-height for each by-\*, or at least link to them as headers
-- [ ] click on tags anywhere to jump to the archive of othat tag
+- [ ] click on tags anywhere to jump to the archive of that tag
 - [x] use mako instead of rolling my own terrible templates out of python format strings
-- [ ] mathematics markdown (see [this mess](/articles/clock-design.html))
 - [ ] audit
-    - [x] use `zedo ifchange -f` where possible
     - [ ] is mako being used in the most efficient way?
     - [ ] can I automatically determine mako dependencies?
-    - [ ] are all targets phony/volatile as needed?
+    - [x] are all targets phony/volatile as needed?
     - [ ] are extra files being marked as such?
     - [ ] feeds are constructed as fully as possible. see [here](https://validator.w3.org/feed/docs/atom.html)
     - [ ] dependencies (esp. on python scripts) are tracked correctly

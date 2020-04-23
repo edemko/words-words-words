@@ -6,15 +6,19 @@ md = markdown.Markdown(
         [ "extra"
         , "sane_lists"
         , "meta"
+        , "mdx_math"
         , 'mdx_superscript', 'subscript'
         , "smarty"
         , "admonition"
         , "codehilite"
         , "markdown_checklist.extension"
-        # FIXME add math formatting
         ],
     extension_configs={
         "codehilite": { "guess_lang": False },
+        "mdx_math": {
+            "enable_dollar_delimiter": True,
+            "add_preview": True,
+        },
     },
     output_format="html5",
 )

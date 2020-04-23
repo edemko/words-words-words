@@ -55,6 +55,7 @@ There are also a handful of 3rd-party markdown extensions:
   * markdown-checklist
   * MarkdownSubscript
   * MarkdownSuperscript
+  * python_markdown_math
 
 ### Deployment
 
