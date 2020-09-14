@@ -32,8 +32,8 @@ def render_links(lines):
                 by_tag[tag] = []
             by_tag[tag].append(obj)
     objs = sorted(objs, key=lambda obj: obj.published, reverse=True)
-    for tag, objs in by_tag.items():
-        by_tag[tag] = sorted(objs, key=lambda obj: obj.published, reverse=True)
+    for tag, tagObjs in by_tag.items(): # WARNING tagObjs can't be just objs, because that would overwrite the objs that gets returned smh
+        by_tag[tag] = sorted(tagObjs, key=lambda obj: obj.published, reverse=True)
     return objs, by_tag
 
 def render_link(line):

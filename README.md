@@ -12,6 +12,7 @@ The build scripts make use of `bash` and `python3` in a virtual environment.
 Setting up for the first time looks like:
 
 ```sh
+sudo apt install libxml2-dev
 cd /path/to/this/project
 git submodule update --init zedo-shim
 export PATH+=":$PWD/zedo-shim/bin"
