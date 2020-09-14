@@ -4,6 +4,13 @@ tag: computing
 tag: reference
 tag: notes
 
+## System Info
+
+```
+uname -a # generic info about the machine
+lsb_release -a # what version of my distro am I running?
+```
+
 ## Apt/Dpkg
 
 List files installed by a package:
@@ -24,6 +31,19 @@ Find out what (installed) packages depend on a given package:
 apt-cache rdepends  --installed some-package
 ```
 
+Install from `.deb`:
+
+```sh
+sudo dpkg -i <deb-file>
+sudo apt-get install -f
+```
+
+or
+
+```sh
+sudo apt install <deb-file>
+```
+
 
 ## Devices
 
@@ -33,6 +53,11 @@ Find out what device a file or folder is on:
 df /path/to/filename
 ```
 
+Find out how much storage space is left on drives:
+
+```sh
+df -H
+```
 
 ## Run commands when files change
 
