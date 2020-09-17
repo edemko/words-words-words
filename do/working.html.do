@@ -3,28 +3,33 @@
 # FIXME this is a near-copy of archive.md.do
 
 import subprocess as sh
+import os, sys
 from os import path
 from glob import glob
 import json
-import re
 import zedo
-from mako.template import Template
-from mako.lookup import TemplateLookup
+import makoc
 
-class Object:
-    pass
+class Object: pass
 
-def main(outFp):
+def main():
+    print("WORKING", file=zedo.rooterr)
+    # FIXME and it'd be nice to generate template dependencies from within mako itself
+    zedo.ifchange("templates/base.html.mako", "templates/working.html.mako")
     published = "articles.txt"
-    published = zedo.ifchange(published, find=True)
+    zedo.ifchange(published)
     with open(published, 'rt', encoding="utf-8") as fp:
-        published = {line.strip(' \t\n\r') for line in fp.readlines()}
-    all_articles = {re.sub(r"^src/articles/(.*)\.md$", r"\1", x)
-                    for x in glob("src/articles/*.md")}
+        published = { line.strip(' \t\n\r') for line in fp.readlines() }
+    # FIXME I need a way to glob source (and build?) directories
+    # it'd be super helpful to also be able to get the matching file paths back
+    src_articleDir = path.join(os.getenv("ZEDO__ROOT"), os.getenv("SRC"), "articles")
+    all_articles = { path.basename(x)[:-3] for x in glob(path.join(src_articleDir, "*.md")) }
     articles, _ = render_links(all_articles - published)
-    t = tlookup.get_template("working.html.mako")
-    outFp.write(t.render(articles = articles))
+    html = makoc.compile("working.html.mako", articles=articles)
+    sys.stdout.write(html)
 
+
+# FIXME the functions below here, I should probly import from archive.html.do
 def render_links(lines):
     objs, by_tag = [], dict()
     for line in lines:
@@ -40,9 +45,8 @@ def render_links(lines):
 
 def render_link(line):
     articleUrl = "articles/{}.html".format(line)
-    articleHtml = zedo.ifchange(articleUrl, find=True)
-    articleMeta = articleHtml + ".meta"
-    with open(articleMeta, 'rt', encoding="utf-8") as meta:
+    zedo.ifchange(articleUrl)
+    with open(articleUrl+".meta", 'rt', encoding="utf-8") as meta:
         meta = json.loads(meta.read())
     obj = Object()
     obj.title = meta.get('title', "Untitled")
@@ -53,13 +57,4 @@ def render_link(line):
 
 
 if __name__ == "__main__":
-    # FIXME and it'd be nice to generate template dependencies from within mako itself
-    zedo.ifchange("templates/base.html.mako", "templates/working.html.mako")
-
-    import sys
-    # FIXME this stuff should really go into some sort of common module
-    templDir = "src/templates"
-    cacheDir = path.join(templDir, ".cache")
-    tlookup = TemplateLookup(directories=[templDir], module_directory=cacheDir)
-    with open(sys.argv[1], 'wt', encoding="utf-8") as outFp:
-        main(outFp)
+    main()

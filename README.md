@@ -6,30 +6,43 @@ The resulting site should be hostable entirely as static files.
 
 ## Developing
 
-The build system is based on [zedo](https://github.com/Zankoku-Okuno/zedo).
-The build scripts make use of `sh` and `python3`, both found using `/usr/bin/env`.
+The build system is based on [zedo](https://github.com/Zankoku-Okuno/zedo); a shim is included.
+The build scripts make use of `bash` and `python3` in a virtual environment.
 
-Setup a venv.
-Required python libraries are in `do/requirements.txt`.
-Then add the non-packaged python utilities in `lib`.
-Also make sure `zedo` is on the path, if it isn't already.
+Setting up for the first time looks like:
 
 ```sh
+sudo apt install libxml2-dev
 cd /path/to/this/project
+git submodule update --init zedo-shim
+export PATH+=":$PWD/zedo-shim/bin"
 python3 -m venv .venv-py3
 source .venv-py3/bin/activate
 pip install --upgrade pip
 pip install -r do/requirements.txt
-export PYTHONPATH="${PYTHONPATH}:$(pwd)"
-export PATH="${PATH}:/directory/containing/zedo/executable"
-zedo init
+export PYTHONPATH+=":$PWD"
 ```
 
-Something I haven't yet implemented in zedo is the ability to produce a distribution.
-For now, distribute from `.zedo/build/` after `ln -s ../../src/assets ../../src/static .zedo/build/`.
+Subsequently:
 
-A particularly useful command is `zedo mini-httpd`, which rebuilds the site and starts an http server on `localhost:10080`.
-Edit `do/mini-httpd.do` to change the port.
+```sh
+cd /path/to/this/project
+export PATH+=":$PWD/zedo-shim/bin"
+source .venv-py3/bin/activate
+export PYTHONPATH+=":$PWD"
+```
+
+optionally with:
+
+```sh
+git submodule update zedo-shim
+pip install --upgrade pip
+pip install --upgrade -r do/requirements.txt
+```
+
+Use `zedo all` to rebuild everything, but probably `zedo working.html` should be called while working on a new article.
+Use `zedo httpd` (only after the other ones) to start up a testing server.
+Distribute from the `build` directory after `zedo all`.
 
 
 The major python dependencies are:
@@ -43,6 +56,7 @@ There are also a handful of 3rd-party markdown extensions:
   * markdown-checklist
   * MarkdownSubscript
   * MarkdownSuperscript
+  * python_markdown_math
 
 ### Deployment
 
@@ -50,7 +64,7 @@ I build the site on my local machine so as to eliminate dependencies from the se
 I'm using rsync to optimize time-to-xfer.
 
 ```sh
-rsync -vrcL /this/repo/.zedo/build/* servername:/path/to/www/root
+rsync -vrcL /this/repo/build/* servername:/path/to/www/root
 ssh servername
 cd /path/to/www/root
 chown -R $USER:www-data .

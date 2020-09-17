@@ -24,3 +24,8 @@ manufacturing-manifesto
 crypto
 ssh-reverse-tunnel
 lang-design-notes
+cli-notes
+tabs-spaces
+lottery-paradox
+ode-to-flip-fmap
+factorio-first-launch-debrief

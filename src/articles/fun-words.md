@@ -42,7 +42,7 @@ Oblaat
 Mottainai
 :   from Japanese "what a waste": a common expression conveying regret of waste.
     Used to refer not only to physical waste (resources), but also thought patters that give rise to wasteful action.
-    The way I see it, one person's waste directly contributes to other's suffering, ans so is impious.
+    The way I see it, one person's waste directly contributes to others' suffering, and therefore is impious.
     Further, even inanimate objects have a spirit, and so waste of them is disrespectful of the artifact.
 
 Clusterfumble
@@ -69,3 +69,12 @@ Weekenday
 
 Lachesism
 :   in reference to the Greek Fate Lachesis: the desire to be struck by disaster, thereby triggering one's life to become more meaningful
+
+Quachotomy
+:   English extension of dichotomy: a choice between four options.
+    Obviously, this entry is only a sample of a larger pattern including trichotomy, quinchotomy, sechotomy, &c.
+    Presumably also "monochotomy" is included, though its use seems more limited.
+
+Quacophony
+:   English portmanteau: the overwhelming noise of many ducks.
+    Not to be confused with Quachotomy.

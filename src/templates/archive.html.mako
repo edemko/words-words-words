@@ -11,22 +11,19 @@
 </%def>
 <h1>Archive</h1>
 
-<h2>by Date</h2>
-
-<ul>
-    % for article in by_date:
-    ${mkhref(article)}
-    % endfor
-</ul>
-
+<div class="jumpto">
+    Jump to:
+    <ul>
+        <li><a href="#by-date">By Date</a></li>
+        <li class="section">By Tag</li>
+        % for tag in sorted(by_tag.keys()):
+        <% tag_id = re.sub(r"\s+", "-", tag) %>\
+        <li><a href='#tag-${tag_id}'>${tag}</a></li>\
+        % endfor
+    </ul>
+<div>
 
 <h2>by Tag</h2>
-
-## FIXME this is not ideal wrt the semantic web
-% for i, tag in enumerate(sorted(by_tag.keys())):
-<% tag_id = re.sub(r"\s+", "-", tag) %>\
-${", " if i else ""}<a href='#tag-${tag_id}'>${tag}</a>\
-% endfor
 
 % for tag, articles in sorted(by_tag.items()):
 <h3 id="tag-${re.sub(r"\s+", "-", tag)}">${tag}</h3>
@@ -36,3 +33,11 @@ ${", " if i else ""}<a href='#tag-${tag_id}'>${tag}</a>\
     % endfor
 </ul>
 % endfor
+
+
+<h2 id="by-date">by Date</h2>
+<ul>
+    % for article in by_date:
+    ${mkhref(article)}
+    % endfor
+</ul>

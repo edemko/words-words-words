@@ -86,12 +86,11 @@ Mitigations include:
 
 ### Pwned Passwords
 
-Never type you password into a third-party service.
+Never type your password into a third-party service.
 Admittedly, [Pwned Passwords](https://haveibeenpwned.com/Passwords) is open-source and allegedly implements anonymity, but I haven't personally audited the source code, so I'll use it locally.
 Therefore, I downloaded the database and loaded it into postgresql to I could search it quickly.
 
-```
-:::sql
+```sql
 COPY pw (hash, count) FROM 'pwned-passwords-sha1-<version>.txt' WITH DELIMITER ':';
 CREATE EXTENSION pgcrypto;
 ALTER TABLE pw ALTER COLUMN hash SET DATA TYPE bytea USING decode(hash, 'hex');
@@ -104,13 +103,12 @@ This took a while, and it seriously impacted my harddrive performance, especiall
 Even just the initial data load took three hours before I went to bed.
 Now though, seraching for passwords happens very quickly:
 
-```
-:::sql
+```sql
 SELECT * FROM pw WHERE hash = digest('P@ssword', 'sha1');
 ```
 
 !!!warning
-    When done, don't forget to clear you psql history, otherwise that's a place where your passwords are stored in cleartext:
+    When done, don't forget to clear your psql history, otherwise that's a place where your passwords are stored in cleartext:
 
     ```
     echo '' > ~/.psql_history
@@ -206,7 +204,7 @@ In gpg, these end up imported and published to key servers in much the same way 
 
 !!!note "To-Do"
     Why aren't revocation certificates guarded by a passphrase?
-    I haven't even seem this mentioned, much less recommended or implemented.
+    I haven't even seen this mentioned, much less recommended or implemented.
 
 
 ### Fingerprinting Keys
@@ -252,6 +250,7 @@ In particular:
 
 !!! note "Links"
     * [Let's Encrypt](https://letsencrypt.org/)
+    * [Certbot](https://certbot.eff.org/)
 
 
 ### SSH Agents
@@ -286,6 +285,7 @@ I don't seem to have notes on it, but I believe it is possible to add a key dire
 !!! caution "To-Do"
     What is this about gpg keyrings?
     How do I manage them?
+    Apparently, they exist in `~/.gnupg/`
 
 You should have obtained checksums and a signature on those checksums from a trusted source.
 I saw recommended somewhere to always get these from the original site, not a mirror.
@@ -388,8 +388,7 @@ On first connecting to a machine, you must verify that machine's identity (see b
 To add a public key to `authorized_keys`, I simply appended the key onto the file.
 I did make a backup first and verify that all machines can still log in.
 
-```
-:::sh
+```sh
 cp ~/.ssh/authorized_keys ~/.ssh/authorized_keys.bak
 cat new_key.pub > ~/.ssh/authorized_keys
 # check logins still function
@@ -432,7 +431,7 @@ I should have known, but ProtonMail does end-to-end and zero-access encryption w
 When emailing someone in ProtonMail, you have the service find the recipient's public key and use that to encrypt.
 Incoming insecure messages are encrypted with your public key immediately on reciept.
 I haven't yet figured out how email gets sent to insecure recipients.
-Between two secure parties is end-to-end, wheras with only one secure party, the best achievable is zero-access.
+Between two secure parties is end-to-end, whereas with only one secure party, the best achievable is zero-access.
 
 It seems that party-to-party authentication in ProtonMail relies on the authenticity of the first contact to exchange public keys, and for that we trust the ProtonMail service.
 [This post](https://protonmail.com/blog/address-verification-pgp-support/) and [this support article](https://protonmail.com/support/knowledge-base/address-verification/) seem to indicate that trusted sender-key associations are stored similarly to ssh (where e.g. I decide to trust a server's key).
