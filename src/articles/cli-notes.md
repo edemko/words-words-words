@@ -1,12 +1,23 @@
 title: CLI Cheatsheet
 published: 2020-04-07
+updated: 2020-09-16
 tag: computing
 tag: reference
 tag: notes
 
+## Quick Fixes
+
+After a shell finds an executable, it caches its location... except it doesn't check its own validity.
+So when you mess with executable locations or the `PATH` clear that cache with
+
+```sh
+hash -r # entire cache
+hash -d <exe name> # one entry
+```
+
 ## System Info
 
-```
+```sh
 uname -a # generic info about the machine
 lsb_release -a # what version of my distro am I running?
 ```
