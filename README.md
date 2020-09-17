@@ -14,6 +14,8 @@ Setting up for the first time looks like:
 ```sh
 sudo apt install libxml2-dev
 cd /path/to/this/project
+mkdir -p build
+ln -s ../src/assets build
 git submodule update --init zedo-shim
 export PATH+=":$PWD/zedo-shim/bin"
 python3 -m venv .venv-py3

@@ -54,7 +54,7 @@ Well, in typesetting the last example, but it wouldn't be a problem if we stoppe
 Nevertheless, it does strike me as a symptom of a foundational issue that tabs for indentation is not able to reliably comment on itself.
 Or it could just be my fondness all things meta.
 
-[^4]: Or screenshots, but who wants to mess around with pictures when you have a keyboard ;P
+[^4]: Or screenshots, but who wants to mess around with pictures when you have a keyboard `;P`
 
 
 ## My Recipe
@@ -64,9 +64,9 @@ Well, be consistent within a project, but be adaptable to different codebases.
 Sure, if you want, you can stop yourself from contributing to a project because it "looks ugly" to you.
 On the other hand, if that ugliness is purely due to whitespace, then you probably have your own issues to worry about.
 So suck it up, put on your adult clothes, and work with other people, or else shut it.
-Adapting to out environment is kinda what us humans are known for; I don't know how humans lost their way.
+Adapting to our environment is kinda what us humans are known for; I don't know how humans lost their way.
 
 Personally, I have my editor set up to show spaces and tabs differently so that I can quickly see what others have done with their code and adapt to it (or fix it).
 For my own projects, I use space, but I don't particularly care how many I use.
 I've used four in the past because it was the default on several editors, but I'm coming to enjoy two spaces now that I've been using it at work.
-The important thing to remember is this: if you use several indentation style, you'll discover _it doesn't matter_.
+The important thing to remember is this: if you try a few indentation styles, you'll discover _it doesn't matter_.

@@ -36,7 +36,7 @@ foo x <&> \x' ->
   bar x' y
 ```
 
-As it happened, I could start by writing the easier-to-understand non-functorial code.
+As it happened, I could start by writing the more familiar monadic algorithms.
 Once I made sure it worked, I retrofitted it to the functorial case with very few keystrokes thanks to `<&>`.
 So thank you `<&>`! You are a wonderful little tool!
 
