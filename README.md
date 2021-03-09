@@ -12,7 +12,7 @@ The build scripts make use of `bash` and `python3` in a virtual environment.
 Setting up for the first time looks like:
 
 ```sh
-sudo apt install libxml2-dev
+sudo apt install libxml2-dev libxslt-dev
 cd /path/to/this/project
 mkdir -p build
 ln -s ../src/assets build

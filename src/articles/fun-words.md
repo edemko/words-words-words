@@ -78,3 +78,6 @@ Quachotomy
 Quacophony
 :   English portmanteau: the overwhelming noise of many ducks.
     Not to be confused with Quachotomy.
+
+Draculating
+:   English derivation from "Dracula": behaving in a dramatically dark and brooding manner

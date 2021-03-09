@@ -247,7 +247,7 @@ Besides, if I can use these for control structures, then I'll sometimes need mul
 ## Spaghetti
 
 Although state-machines can be a looped-switch, threaded code is faster, if not structured.
-I propose a control spaghetti structure which essentially just allows gotos back in, but where variables are slightly more controlled.
+I propose a "spaghetti" control flow structure which essentially just allows gotos back in, but where variables are slightly more controlled.
 
 ```
 fn parseStr(char* in, char* out) -> offset_t {

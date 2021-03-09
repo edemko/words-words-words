@@ -22,6 +22,12 @@ uname -a # generic info about the machine
 lsb_release -a # what version of my distro am I running?
 ```
 
+```sh
+w # who is logged on and what are they doing
+who --all # more information on running users
+```
+
+
 ## Apt/Dpkg
 
 List files installed by a package:
