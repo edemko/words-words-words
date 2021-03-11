@@ -20,7 +20,7 @@ def main():
     zedo.ifchange(published)
     with open(published, 'rt', encoding="utf-8") as fp:
         lines = fp.readlines()
-    latest = render_links(lines)[0]
+    latest = render_links(lines)[-1]
     with open("articles/{}.md".format(latest.basename), 'rt', encoding='utf-8') as fp:
         latest.html, _ = mdc.compile(fp.read())
 
