@@ -101,7 +101,7 @@ SELECT * FROM pw WHERE hash = digest('P@ssword', 'sha1');
 
 This took a while, and it seriously impacted my harddrive performance, especially during reindexing.
 Even just the initial data load took three hours before I went to bed.
-Now though, seraching for passwords happens very quickly:
+Now though, searching for passwords happens very quickly:
 
 ```sql
 SELECT * FROM pw WHERE hash = digest('P@ssword', 'sha1');
@@ -345,6 +345,37 @@ Mounting, at least in XFCE seems to be as easy as mounting anything else, with t
 
 !!! note "Links"
     * [EncryptedFilesystemsOnRemovableStorage](https://help.ubuntu.com/community/EncryptedFilesystemsOnRemovableStorage)
+
+### Encrypting a Single File
+
+It is sometimes useful to encrypt a single file (e.g. saving come confidential data to a server for which you are not the only root/sudo user).
+Even if your storage media is encrypted, encrypting particularly sensitive files is good defense-in-depth: in case your account is compromised, encrypted files might still be protected when encrypted.
+
+GPG recognizes this, and already has the functionality built-in.
+
+```sh
+# use on an interactive shell: it prompts for a passphrase
+gpg -c important.txt # encypt, creating important.txt.gpg, but leaving the original (plaintext) file in place
+
+gpg imporant.txt.gpg # decypt back to important.txt
+gpg -d imporant.txt.gpg # decypt, placing output on stdout only
+```
+
+!!!warning
+    Correctly deleting a single file securely on modern filesystems and hard drives is very difficult.
+    On journaling filesystems (e.g. ext4), file will be recoverable from the journal for an arbitrary length of time afterwards.
+    Some SSDs and HDDs have journaling in the hardware as well.
+    Long story short, it's best to securely delete an entire partition, but that's likely more than you want to do if you're interested only in a single file.
+
+The default is to encrypt with AES128, but this can be overridden with the `--crypto-algo` argument (assuming you know what you're doing).
+A list of cipher algorithms can be seen with `gpg --version`.
+
+You can change the output file with the `-o` argument.
+It's not in the man page, but `-o -` puts the output on stdout (though obvs it's binary data, so only really useful when piping).
+
+### Encrypting a Directory
+
+Apparently it's much like a single file, but use `gpg-zip`.
 
 ## Specific Services
 
