@@ -1,4 +1,6 @@
 title: Sisyphus is Dead, Long Live Sisyphus
+published: 2022-01-17
+tag: sisyphus
 
 All the tools of Project Sisyphus are dead.
 I don't write accomplishments on my calendar, I don't Bullet Journal, I don't have even have reminders on my phone, I don't do yearly reviews.
@@ -25,9 +27,9 @@ Don't be like me: don't accidentally spiral into that state and have to spend yo
 So you aren't working on anything "important" or "serious", so what?
 Even if it's just something stupid and useless, working on literally anything is still better than just consuming food, water, oxygen, entertainment[^news], other people's goodwill, and so on.
 
-Don't get me wring, there's a space for consumption, but when you have a project idea, it's best to limit consumption as much as possible.[^possible]
+Don't get me wrong, there's a space for consumption, but when you have a project idea, it's best to limit consumption as much as possible.[^possible]
 
-[^possible]: but dont' be a fanatic, obvs
+[^possible]: but don't be a fanatic, obvs
 [^news]: _Almost all_ news falls into this category as well. "Proper" news (because who am I to define it?) is something that changes your decision-making process.
 
 
@@ -51,5 +53,3 @@ Go see Martin's angle grinder while he works on the Marble Machine X.
 ## More of Martin's tips
 
 In [one of his MMX videos](https://www.youtube.com/watch?v=eLUDauIxudM), Martin describes some productivity tricks he picked up while working on an intense two-year "hobbyist" project.
-
-TODO

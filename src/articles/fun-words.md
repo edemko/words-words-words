@@ -8,6 +8,7 @@ updated: 2018-05-05
 updated: 2018-06-23
 updated: 2018-10-13
 updated: 2020-01-09
+updated: 2021-09-16
 tag: reference
 tag: notes
 
@@ -81,3 +82,12 @@ Quacophony
 
 Draculating
 :   English derivation from "Dracula": behaving in a dramatically dark and brooding manner
+
+Longoing
+:   English portmanteau: ongoing over an especially long period of time
+
+Sneakretly
+:   English portmanteau: sneaky and secret
+
+Goatforsaken
+:   English portmanteau: extremely steep; i.e. even goats cannot climb it

@@ -18,15 +18,15 @@ def init_feed():
     fg = FeedGenerator()
     fg.title("A Poorer Molecular Biologist")
     fg.author({
-        "name": "Okuno Zankoku",
-        "email": "okuno54@gmail.com",
+        "name": "Eric Demko",
+        "email": "zankoku.okuno@gmail.com",
         })
     # FIXME re-configurable domain
-    fg.id("http://blag.okuno.info")
-    fg.link(href="http://blag.okuno.info", rel="alternate")
+    fg.id("http://blag.edemko.net")
+    fg.link(href="http://blag.edemko.net", rel="alternate")
     # fg.logo("some url")
     fg.subtitle("I write things sometimes.")
-    fg.link(href="http://blag.okuno.info/rss.xml", rel="self")
+    fg.link(href="http://blag.edemko.net/rss.xml", rel="self")
     fg.language("en")
     return fg
 
@@ -34,8 +34,8 @@ def mk_feed_entry(fg, articleName, articleMeta):
     with open(articleMeta, 'rt', encoding="utf-8") as fp:
         meta = json.loads(fp.read())
     fe = fg.add_entry()
-    fe.id("http://blag.okuno.info/articles/{}".format(articleName))
-    fe.link(href="http://blag.okuno.info/articles/{}.html".format(articleName), rel="alternate")
+    fe.id("http://blag.edemko.net/articles/{}".format(articleName))
+    fe.link(href="http://blag.edemko.net/articles/{}.html".format(articleName), rel="alternate")
     fe.title(meta["title"])
     fe.published(adapt_date(meta['published']))
     # fe.updated(adapt_date(meta['published'])) # FIXME find the latest date from published and updateds

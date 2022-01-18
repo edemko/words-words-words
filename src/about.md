@@ -41,7 +41,7 @@ Not only will the site be styled nicely, but more importantly, an up-to-date bro
 [^almost-js-free]: Dang it! Annoyingly, I'm using MathJax to render mathematical formulae.
 But, if you can read LaTex reasonably well, you still don't need it.
 
-The site's source code is open-source, hosted on [GitHub](https://github.com/Zankoku-Okuno/blag).
+The site's source code is open-source, hosted on [GitHub](https://github.com/edemko/words-words-words).
 The site content is written entirely in markdown.
 It is compiled to static files using a [zedo](https://github.com/Zankoku-Okuno/zedo)-based build script coordinating bash and python.
 
@@ -57,17 +57,17 @@ img.avatar {
 </style>
 <img class="avatar" src="/assets/avatar.png" height="100" width="100"/>
 
-My handle is Okuno Zankoku.[^name]
+My name is Eric Demko.[^name]
 My education is in physics, I'm a programmer by trade, and I enjoy creative pursuits.
 I chase ideas to their foundations.
 My media include: formal languages, epistemology, type theory, software, firmware, digital electronics, linguistics, wood, plexi, fabric, and words.
 
 <ul style="list-style: none;">
     <li>
-        <a href="mailto:okuno54@gmail.com"><img src="/assets/logos/icon-email-128.png" height="18" width="18"/> &lt;okuno54@gmail.com&gt;</li>
+        <a href="mailto:zankoku.okuno@gmail.com"><img src="/assets/logos/icon-email-128.png" height="18" width="18"/> &lt;zankoku.okuno@gmail.com&gt;</li>
     </li>
     <li>
-        <a href="https://github.com/Zankoku-Okuno/"><img src="/assets/logos/GitHub-Mark-32px.png" height="18" width="18"> Github</a>
+        <a href="https://github.com/edemko/"><img src="/assets/logos/GitHub-Mark-32px.png" height="18" width="18"> Github</a>
     </li>
     <li>
         <a href="/rss.xml"><img src="/assets/logos/feed-icon-28x28.png" height="18" width="18"/> RSS</a>
@@ -79,4 +79,4 @@ My media include: formal languages, epistemology, type theory, software, firmwar
 
 TODO: I should probably post some public keys here.
 
-[^name]: it's a long story…
+[^name]: though I've used the handle Okuno Zankoku extensively. It's a long story…

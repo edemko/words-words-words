@@ -31,3 +31,5 @@ ode-to-flip-fmap
 factorio-first-launch-debrief
 oo-little-solved
 data-cube
+big-ships
+sisyphus-is-dead
